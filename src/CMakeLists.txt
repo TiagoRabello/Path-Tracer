@@ -1,3 +1,7 @@
+SOURCE_GROUP("core" FILES
+  ${CMAKE_CURRENT_LIST_DIR}/core/material.hpp
+)
+
 SOURCE_GROUP("graphics" FILES
   ${CMAKE_CURRENT_LIST_DIR}/graphics/color.hpp
 )
@@ -17,6 +21,8 @@ SOURCE_GROUP("shapes" FILES
 
 SET( APP_SOURCES
   ${APP_SOURCES}
+  
+  ${CMAKE_CURRENT_LIST_DIR}/core/material.hpp
   
   ${CMAKE_CURRENT_LIST_DIR}/graphics/color.hpp
   
