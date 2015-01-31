@@ -11,6 +11,10 @@ SOURCE_GROUP("math" FILES
   ${CMAKE_CURRENT_LIST_DIR}/math/vector3d.hpp
 )
 
+SOURCE_GROUP("shapes" FILES
+  ${CMAKE_CURRENT_LIST_DIR}/shapes/sphere.hpp
+)
+
 SET( APP_SOURCES
   ${APP_SOURCES}
   
@@ -22,6 +26,9 @@ SET( APP_SOURCES
   ${CMAKE_CURRENT_LIST_DIR}/math/ray3d.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/trigonometry.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/vector3d.hpp
+
+  ${CMAKE_CURRENT_LIST_DIR}/shapes/sphere.hpp
+
 
   ${CMAKE_CURRENT_LIST_DIR}/main.cpp
   PARENT_SCOPE
