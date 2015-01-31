@@ -1,5 +1,6 @@
 SOURCE_GROUP("core" FILES
   ${CMAKE_CURRENT_LIST_DIR}/core/material.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/core/object.hpp
 )
 
 SOURCE_GROUP("graphics" FILES
@@ -21,8 +22,9 @@ SOURCE_GROUP("shapes" FILES
 
 SET( APP_SOURCES
   ${APP_SOURCES}
-  
+
   ${CMAKE_CURRENT_LIST_DIR}/core/material.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/core/object.hpp
   
   ${CMAKE_CURRENT_LIST_DIR}/graphics/color.hpp
   
@@ -34,7 +36,6 @@ SET( APP_SOURCES
   ${CMAKE_CURRENT_LIST_DIR}/math/vector3d.hpp
 
   ${CMAKE_CURRENT_LIST_DIR}/shapes/sphere.hpp
-
 
   ${CMAKE_CURRENT_LIST_DIR}/main.cpp
   PARENT_SCOPE
