@@ -33,7 +33,7 @@ struct vector3d
   }
 };
 
-vector3d operator-(vector3d vector)
+inline vector3d operator-(vector3d vector)
 {
   return { -vector.x, -vector.y, -vector.z };
 }
