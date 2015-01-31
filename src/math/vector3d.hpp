@@ -1,5 +1,5 @@
-#ifndef _MATH_POINT3D
-#define _MATH_POINT3D
+#ifndef _MATH_VECTOR3D
+#define _MATH_VECTOR3D
 
 #include <cassert>
 #include <cmath>
