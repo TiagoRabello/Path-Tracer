@@ -36,12 +36,6 @@ FIND_PACKAGE( GLFW REQUIRED )
 INCLUDE_DIRECTORIES( ${GLFW_INCLUDE_DIR} )
 
 #########################################################
-# FIND glm
-#########################################################
-FIND_PACKAGE( GLM REQUIRED )
-INCLUDE_DIRECTORIES( ${GLM_INCLUDE_DIRS} )
-
-#########################################################
 # FIND OpenGL
 #########################################################
 FIND_PACKAGE( OpenGL REQUIRED )
