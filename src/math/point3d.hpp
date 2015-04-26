@@ -27,7 +27,7 @@ inline bool operator==(point3d lhs, point3d rhs)
 inline bool operator!=(point3d lhs, point3d rhs)
 {
   return !(lhs == rhs);
-};
+}
 
 inline float squared_distance(point3d p1, point3d p2)
 {
