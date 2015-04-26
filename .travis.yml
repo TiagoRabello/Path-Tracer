@@ -6,7 +6,7 @@ os:
 
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -qq xorg-dev
+  - sudo apt-get install -qq xorg-dev gcc
 
 env:
   - BUILD_TYPE=Debug
