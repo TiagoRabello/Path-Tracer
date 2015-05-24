@@ -2,6 +2,7 @@
 #define CORE_OBJECT_HPP
 
 #include "material.hpp"
+#include <math/ray3d.hpp>
 #include <shapes/sphere.hpp>
 
 #include <tuple>
@@ -24,6 +25,11 @@ inline bool operator==(object lhs, object rhs)
 inline bool operator!=(object lhs, object rhs)
 {
   return !(lhs == rhs);
+}
+
+inline bool intersects(const object& obj, math::ray3d ray)
+{
+  return shapes::intersects(obj.shape, ray);
 }
 
 }
