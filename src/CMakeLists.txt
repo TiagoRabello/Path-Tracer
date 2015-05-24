@@ -2,6 +2,7 @@ SOURCE_GROUP("core" FILES
   ${CMAKE_CURRENT_LIST_DIR}/core/intersection_info.hpp
   ${CMAKE_CURRENT_LIST_DIR}/core/material.hpp
   ${CMAKE_CURRENT_LIST_DIR}/core/object.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/core/scene.hpp
 )
 
 SOURCE_GROUP("graphics" FILES
@@ -28,6 +29,7 @@ SET( APP_SOURCES
   ${CMAKE_CURRENT_LIST_DIR}/core/intersection_info.hpp
   ${CMAKE_CURRENT_LIST_DIR}/core/material.hpp
   ${CMAKE_CURRENT_LIST_DIR}/core/object.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/core/scene.hpp
   
   ${CMAKE_CURRENT_LIST_DIR}/graphics/color.hpp
   

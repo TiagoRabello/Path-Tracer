@@ -60,6 +60,15 @@ ELSE( OPENGL_FOUND )
 ENDIF( OPENGL_FOUND )
 
 #########################################################
+# FIND Boost
+#########################################################
+FIND_PACKAGE(Boost 1.30.0 REQUIRED)
+
+IF(Boost_FOUND)
+    INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
+ENDIF()
+
+#########################################################
 # App Generation Configuration
 #########################################################
 INCLUDE_DIRECTORIES( ${MAIN_INCLUDE_DIR} )
@@ -72,6 +81,7 @@ IF( GLFW_FOUND AND OPENGL_FOUND )
   TARGET_LINK_LIBRARIES( ${APP_NAME}
     ${OPENGL_LIBRARY}
     ${GLFW_LIBRARIES}
+    ${Boost_LIBRARIES}
   )
 
 ENDIF( GLFW_FOUND AND OPENGL_FOUND )
@@ -81,3 +91,7 @@ ENDIF( GLFW_FOUND AND OPENGL_FOUND )
 #########################################################
 ADD_SUBDIRECTORY( ${TEST_SOURCE_DIR} )
 ADD_EXECUTABLE( "test_${APP_NAME}" ${TEST_SOURCES} )
+
+TARGET_LINK_LIBRARIES( "test_${APP_NAME}"
+  ${Boost_LIBRARIES}
+)
