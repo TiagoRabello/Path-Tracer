@@ -10,5 +10,7 @@ SET( TEST_SOURCES
   ${CMAKE_CURRENT_LIST_DIR}/tests_math_utility.cpp
   ${CMAKE_CURRENT_LIST_DIR}/tests_math_vector3d.cpp
 
+  ${CMAKE_CURRENT_LIST_DIR}/tests_shapes_sphere.cpp
+
   PARENT_SCOPE
 )
