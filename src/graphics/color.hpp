@@ -1,5 +1,5 @@
-#ifndef _COLOR_HPP
-#define _COLOR_HPP
+#ifndef COLOR_HPP
+#define COLOR_HPP
 
 #include <tuple>
 

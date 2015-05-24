@@ -1,5 +1,5 @@
-#ifndef TRIGONOMETRY_HPP
-#define TRIGONOMETRY_HPP
+#ifndef MATH_TRIGONOMETRY_HPP
+#define MATH_TRIGONOMETRY_HPP
 
 #include "degrees.hpp"
 #include "radians.hpp"

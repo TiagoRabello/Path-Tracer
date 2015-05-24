@@ -1,5 +1,5 @@
-#ifndef _MATH_DEGREES_HPP
-#define _MATH_DEGREES_HPP
+#ifndef MATH_DEGREES_HPP
+#define MATH_DEGREES_HPP
 
 namespace math
 {

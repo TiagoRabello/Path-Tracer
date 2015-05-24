@@ -1,5 +1,5 @@
-#ifndef _MATH_RADIANS_HPP
-#define _MATH_RADIANS_HPP
+#ifndef MATH_RADIANS_HPP
+#define MATH_RADIANS_HPP
 
 namespace math
 {

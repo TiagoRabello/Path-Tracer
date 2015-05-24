@@ -1,5 +1,5 @@
-#ifndef _CORE_OBJECT_HPP
-#define _CORE_OBJECT_HPP
+#ifndef CORE_OBJECT_HPP
+#define CORE_OBJECT_HPP
 
 #include "material.hpp"
 #include <shapes/sphere.hpp>

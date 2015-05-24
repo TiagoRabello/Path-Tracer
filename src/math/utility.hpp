@@ -1,5 +1,5 @@
-#ifndef _MATH_UTILITY_HPP
-#define _MATH_UTILITY_HPP
+#ifndef MATH_UTILITY_HPP
+#define MATH_UTILITY_HPP
 
 #include "point3d.hpp"
 #include "vector3d.hpp"

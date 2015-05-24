@@ -1,5 +1,5 @@
-#ifndef _CORE_INTERSECTION_INFO_HPP
-#define _CORE_INTERSECTION_INFO_HPP
+#ifndef CORE_INTERSECTION_INFO_HPP
+#define CORE_INTERSECTION_INFO_HPP
 
 #include <math/point3d.hpp>
 #include <math/vector3d.hpp>

@@ -1,5 +1,5 @@
-#ifndef _MATH_VECTOR3D
-#define _MATH_VECTOR3D
+#ifndef MATH_VECTOR3D
+#define MATH_VECTOR3D
 
 #include <cassert>
 #include <cmath>

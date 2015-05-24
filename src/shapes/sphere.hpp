@@ -1,5 +1,5 @@
-#ifndef _SHAPES_SPHERE_HPP
-#define _SHAPES_SPHERE_HPP
+#ifndef SHAPES_SPHERE_HPP
+#define SHAPES_SPHERE_HPP
 
 #include <math/point3d.hpp>
 #include <math/ray3d.hpp>

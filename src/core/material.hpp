@@ -1,5 +1,5 @@
-#ifndef _CORE_MATERIAL_HPP
-#define _CORE_MATERIAL_HPP
+#ifndef CORE_MATERIAL_HPP
+#define CORE_MATERIAL_HPP
 
 #include <graphics/color.hpp>
 

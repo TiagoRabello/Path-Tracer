@@ -1,5 +1,5 @@
-#ifndef _MATH_RAY3D_HPP
-#define _MATH_RAY3D_HPP
+#ifndef MATH_RAY3D_HPP
+#define MATH_RAY3D_HPP
 
 #include "point3d.hpp"
 #include "vector3d.hpp"

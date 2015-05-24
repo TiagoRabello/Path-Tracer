@@ -1,5 +1,5 @@
-#ifndef _MATH_POINT3D
-#define _MATH_POINT3D
+#ifndef MATH_POINT3D
+#define MATH_POINT3D
 
 #include <cmath>
 #include <tuple>
