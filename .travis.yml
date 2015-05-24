@@ -1,4 +1,6 @@
 language: cpp
+os:
+  - linux
 
 compiler:
   #- clang
@@ -23,6 +25,7 @@ install:
   - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.4"; fi
 
   - sudo apt-get install -qq xorg-dev
+  - sudo apt-get install libboost-dev
 
 env:
   - BUILD_TYPE=Debug
