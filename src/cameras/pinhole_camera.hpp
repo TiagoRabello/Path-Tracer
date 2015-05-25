@@ -28,7 +28,7 @@ class pinhole_camera
   math::vector3d near_u;
   math::vector3d near_v;
 
-  void pinhole_camera::resize(float film_width, float film_height);
+  void resize(float film_width, float film_height);
 
 public:
   pinhole_camera(math::point3d  eye
