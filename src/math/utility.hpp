@@ -14,7 +14,7 @@ inline vector3d make_vector3d(point3d from, point3d to)
 
 inline point3d translated(point3d point, vector3d direction)
 {
-  return{ point.x + direction.x, point.y - direction.y, point.z - direction.z };
+  return{ point.x + direction.x, point.y + direction.y, point.z + direction.z };
 }
 
 }
