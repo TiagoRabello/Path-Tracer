@@ -3,6 +3,7 @@
 
 #include "object.hpp"
 
+#include <lights/point_light.hpp>
 #include <math/ray3d.hpp>
 
 #include <boost/optional.hpp>
@@ -17,10 +18,12 @@ namespace core
 class scene
 {
   std::vector<object> objects;
+  std::vector<lights::point_light> lights;
 
 public:
 
   void add(const object& obj) { objects.push_back(obj); }
+  void add(lights::point_light light) { lights.push_back(light); }
 
   friend boost::optional<const object&> intersects(const scene& scene, math::ray3d ray);
 };
