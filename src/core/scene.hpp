@@ -10,6 +10,7 @@
 #include <boost/none.hpp>
 
 #include <algorithm>
+#include <numeric>
 #include <vector>
 
 namespace core
@@ -22,21 +23,49 @@ class scene
 
 public:
 
+  struct intersection_info
+  {
+    core::intersection_info shape_info;
+    const object *obj;
+  };
+
   void add(const object& obj) { objects.push_back(obj); }
   void add(lights::point_light light) { lights.push_back(light); }
 
-  friend boost::optional<const object&> intersects(const scene& scene, math::ray3d ray);
+  friend bool intersects(const scene& scene, math::ray3d ray);
+  friend boost::optional<scene::intersection_info> closest_intersection(const scene& scene, math::ray3d ray);
 };
 
-inline boost::optional<const object&> intersects(const scene& scene, math::ray3d ray)
+inline bool intersects(const scene& scene, math::ray3d ray)
 {
-  auto itr = std::find_if(std::begin(scene.objects), std::end(scene.objects), [=](const object& obj){
+  return std::any_of(std::begin(scene.objects), std::end(scene.objects), [=](const object& obj){
     return intersects(obj, ray);
   });
+}
 
-  if (itr != std::end(scene.objects)) { return *itr; }
+inline boost::optional<scene::intersection_info> closest_intersection(const scene& scene, math::ray3d ray)
+{
+  scene::intersection_info info;
+  float min_dist = std::numeric_limits<float>::infinity();
 
-  return boost::none;
+  for (auto &obj : scene.objects)
+  {
+    auto possible_inter = closest_intersection(obj, ray);
+
+    if (possible_inter.is_initialized() == false) { continue; }
+
+    auto curr_dist = math::distance(ray.origin, possible_inter.get().point);
+    if (curr_dist < min_dist)
+    {
+      min_dist = curr_dist;
+      info.obj = &obj;
+      info.shape_info = possible_inter.get();
+    }
+  }
+
+  if (min_dist == std::numeric_limits<float>::infinity()) { return boost::none; }
+
+  return info;
 }
 
 }

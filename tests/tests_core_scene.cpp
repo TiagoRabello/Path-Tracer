@@ -22,9 +22,11 @@ SCENARIO("We can test scenes for intersection with rays", "[core][scene]")
 
       THEN("a intersection with the first object is found")
       {
-        auto possible_object = core::intersects(scene, ray);
-        REQUIRE(possible_object.is_initialized() == true);
-        REQUIRE(possible_object.get() == obj1);
+        REQUIRE(core::intersects(scene, ray) == true);
+
+        auto possible_info = core::closest_intersection(scene, ray);
+        REQUIRE(possible_info.is_initialized() == true);
+        REQUIRE(*(possible_info.get().obj) == obj1);
       }
     }
 
@@ -34,9 +36,39 @@ SCENARIO("We can test scenes for intersection with rays", "[core][scene]")
 
       THEN("a intersection with the second object is found")
       {
-        auto possible_object = core::intersects(scene, ray);
-        REQUIRE(possible_object.is_initialized() == true);
-        REQUIRE(possible_object.get() == obj2);
+        REQUIRE(core::intersects(scene, ray) == true);
+
+        auto possible_info = core::closest_intersection(scene, ray);
+        REQUIRE(possible_info.is_initialized() == true);
+        REQUIRE(*(possible_info.get().obj) == obj2);
+      }
+    }
+
+    GIVEN("a ray pointing to the first object through the second one")
+    {
+      auto ray = math::ray3d{ math::point3d{ 0.0f, 4.0f, 0.0f }, math::vector3d{ 0.0f, -1.0f, 0.0f } };
+
+      THEN("a intersection with the first object is found")
+      {
+        REQUIRE(core::intersects(scene, ray) == true);
+
+        auto possible_info = core::closest_intersection(scene, ray);
+        REQUIRE(possible_info.is_initialized() == true);
+        REQUIRE(*(possible_info.get().obj) == obj2);
+      }
+    }
+
+    GIVEN("a ray pointing to the second object through the first one")
+    {
+      auto ray = math::ray3d{ math::point3d{ 0.0f, -2.0f, 0.0f }, math::vector3d{ 0.0f, 1.0f, 0.0f } };
+
+      THEN("a intersection with the first object is found")
+      {
+        REQUIRE(core::intersects(scene, ray) == true);
+
+        auto possible_info = core::closest_intersection(scene, ray);
+        REQUIRE(possible_info.is_initialized() == true);
+        REQUIRE(*(possible_info.get().obj) == obj1);
       }
     }
 
@@ -46,8 +78,8 @@ SCENARIO("We can test scenes for intersection with rays", "[core][scene]")
 
       THEN("no intersection is found")
       {
-        auto possible_object = core::intersects(scene, ray);
-        REQUIRE(possible_object.is_initialized() == false);
+        REQUIRE(core::intersects(scene, ray) == false);
+        REQUIRE(core::closest_intersection(scene, ray).is_initialized() == false);
       }
     }
   }
@@ -62,8 +94,8 @@ SCENARIO("We can test scenes for intersection with rays", "[core][scene]")
 
       THEN("no intersection is found")
       {
-        auto possible_object = core::intersects(scene, ray);
-        REQUIRE(possible_object.is_initialized() == false);
+        REQUIRE(core::intersects(scene, ray) == false);
+        REQUIRE(core::closest_intersection(scene, ray).is_initialized() == false);
       }
     }
   }
