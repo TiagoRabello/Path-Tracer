@@ -2,6 +2,8 @@ SET( TEST_SOURCES
   ${TEST_SOURCES}
   ${CMAKE_CURRENT_LIST_DIR}/tests_main.cpp
 
+  ${CMAKE_CURRENT_LIST_DIR}/tests_cameras_pinhole_camera.cpp
+
   ${CMAKE_CURRENT_LIST_DIR}/tests_core_intersection_info.cpp
   ${CMAKE_CURRENT_LIST_DIR}/tests_core_object.cpp
   ${CMAKE_CURRENT_LIST_DIR}/tests_core_scene.cpp

@@ -1,3 +1,8 @@
+SOURCE_GROUP("cameras" FILES
+  ${CMAKE_CURRENT_LIST_DIR}/cameras/pinhole_camera.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/cameras/pinhole_camera.hpp
+)
+
 SOURCE_GROUP("core" FILES
   ${CMAKE_CURRENT_LIST_DIR}/core/intersection_info.hpp
   ${CMAKE_CURRENT_LIST_DIR}/core/material.hpp
@@ -29,6 +34,9 @@ SOURCE_GROUP("shapes" FILES
 
 SET( LIB_SOURCES
   ${LIB_SOURCES}
+
+  ${CMAKE_CURRENT_LIST_DIR}/cameras/pinhole_camera.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/cameras/pinhole_camera.hpp
 
   ${CMAKE_CURRENT_LIST_DIR}/core/intersection_info.hpp
   ${CMAKE_CURRENT_LIST_DIR}/core/material.hpp
