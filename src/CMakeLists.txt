@@ -27,8 +27,8 @@ SOURCE_GROUP("shapes" FILES
   ${CMAKE_CURRENT_LIST_DIR}/shapes/sphere.hpp
 )
 
-SET( APP_SOURCES
-  ${APP_SOURCES}
+SET( LIB_SOURCES
+  ${LIB_SOURCES}
 
   ${CMAKE_CURRENT_LIST_DIR}/core/intersection_info.hpp
   ${CMAKE_CURRENT_LIST_DIR}/core/material.hpp
@@ -36,7 +36,7 @@ SET( APP_SOURCES
   ${CMAKE_CURRENT_LIST_DIR}/core/scene.hpp
   
   ${CMAKE_CURRENT_LIST_DIR}/graphics/color.hpp
-  
+
   ${CMAKE_CURRENT_LIST_DIR}/lights/point_light.hpp
   
   ${CMAKE_CURRENT_LIST_DIR}/math/degrees.hpp
@@ -48,6 +48,11 @@ SET( APP_SOURCES
   ${CMAKE_CURRENT_LIST_DIR}/math/vector3d.hpp
 
   ${CMAKE_CURRENT_LIST_DIR}/shapes/sphere.hpp
+  PARENT_SCOPE
+)
+
+SET( APP_SOURCES
+  ${APP_SOURCES}
 
   ${CMAKE_CURRENT_LIST_DIR}/main.cpp
   PARENT_SCOPE

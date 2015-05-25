@@ -4,13 +4,15 @@
 SET( MAIN_INCLUDE_DIR        "${CMAKE_CURRENT_LIST_DIR}/src"   )
 SET( MAIN_SOURCE_DIR         "${CMAKE_CURRENT_LIST_DIR}/src"   )
 SET( TEST_SOURCE_DIR         "${CMAKE_CURRENT_LIST_DIR}/tests" )
-SET( APP_NAME                "path_tracer"                     )
+SET( APP_NAME                "path_tracer_demo"                )
+SET( LIB_NAME                "path_tracer_lib"                 )
+SET( TEST_NAME               "path_tracer_test"                )
 
 ################################################
 # App Generation Code
 ################################################
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8.7 )
-PROJECT( ${APP_NAME} CXX C )
+PROJECT( "path_tracer" CXX C )
 
 ################################################
 # App Compiler Flags
@@ -65,20 +67,30 @@ ENDIF( OPENGL_FOUND )
 FIND_PACKAGE(Boost 1.30.0 REQUIRED)
 
 IF(Boost_FOUND)
-    INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
+  INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
 ENDIF()
+
+INCLUDE_DIRECTORIES( ${MAIN_INCLUDE_DIR} )
+ADD_SUBDIRECTORY( ${MAIN_SOURCE_DIR} )
+
+#########################################################
+# Library Generation Configuration
+#########################################################
+ADD_LIBRARY(${LIB_NAME} STATIC ${LIB_SOURCES})
+
+TARGET_LINK_LIBRARIES( ${LIB_NAME}
+  ${Boost_LIBRARIES}
+)
 
 #########################################################
 # App Generation Configuration
 #########################################################
-INCLUDE_DIRECTORIES( ${MAIN_INCLUDE_DIR} )
-
 IF( GLFW_FOUND AND OPENGL_FOUND )
 
-  ADD_SUBDIRECTORY( ${MAIN_SOURCE_DIR} )
   ADD_EXECUTABLE( ${APP_NAME} ${APP_SOURCES} )
 
   TARGET_LINK_LIBRARIES( ${APP_NAME}
+    ${LIB_NAME}
     ${OPENGL_LIBRARY}
     ${GLFW_LIBRARIES}
     ${Boost_LIBRARIES}
@@ -90,8 +102,9 @@ ENDIF( GLFW_FOUND AND OPENGL_FOUND )
 # Tests Generation Configuration
 #########################################################
 ADD_SUBDIRECTORY( ${TEST_SOURCE_DIR} )
-ADD_EXECUTABLE( "test_${APP_NAME}" ${TEST_SOURCES} )
+ADD_EXECUTABLE( ${TEST_NAME} ${TEST_SOURCES} )
 
-TARGET_LINK_LIBRARIES( "test_${APP_NAME}"
+TARGET_LINK_LIBRARIES( ${TEST_NAME}
+  ${LIB_NAME}
   ${Boost_LIBRARIES}
 )
