@@ -16,6 +16,7 @@ SCENARIO("We can test objects for intersection with rays", "[core][object]")
       THEN("a intersection is found")
       {
         REQUIRE(core::intersects(obj, ray) == true);
+        REQUIRE(core::closest_intersection(obj, ray).is_initialized() == true);
       }
     }
 
@@ -26,6 +27,7 @@ SCENARIO("We can test objects for intersection with rays", "[core][object]")
       THEN("no intersection is found")
       {
         REQUIRE(core::intersects(obj, ray) == false);
+        REQUIRE(core::closest_intersection(obj, ray).is_initialized() == false);
       }
     }
   }

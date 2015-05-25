@@ -5,6 +5,8 @@
 #include <math/ray3d.hpp>
 #include <shapes/sphere.hpp>
 
+#include <boost/optional.hpp>
+
 #include <tuple>
 
 namespace core
@@ -30,6 +32,11 @@ inline bool operator!=(object lhs, object rhs)
 inline bool intersects(const object& obj, math::ray3d ray)
 {
   return shapes::intersects(obj.shape, ray);
+}
+
+inline boost::optional<intersection_info> closest_intersection(const object& obj, math::ray3d ray)
+{
+  return shapes::closest_intersection(obj.shape, ray);
 }
 
 }
