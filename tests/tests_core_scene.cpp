@@ -10,10 +10,12 @@ SCENARIO("We can test scenes for intersection with rays", "[core][scene]")
 
     core::object obj1;
     obj1.shape = { { 0.0f, 0.0f, 0.0f }, 1.0f };
+    obj1.material = {};
     scene.add(obj1);
 
     core::object obj2;
     obj2.shape = { { 0.0f, 2.0f, 0.0f }, 1.0f };
+    obj2.material = {};
     scene.add(obj2);
 
     GIVEN("a ray pointing to the first object")

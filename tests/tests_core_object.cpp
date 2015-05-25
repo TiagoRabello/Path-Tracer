@@ -8,6 +8,7 @@ SCENARIO("We can test objects for intersection with rays", "[core][object]")
   {
     core::object obj;
     obj.shape = { { 0.0f, 0.0f, 0.0f }, 1.0f };
+    obj.material = {};
 
     GIVEN("a ray pointing to the object")
     {
