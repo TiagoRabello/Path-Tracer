@@ -16,7 +16,14 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
 
       THEN("a intersection is found")
       {
+        core::intersection_info expected_info = { math::point3d{ 1.0f, 0.0f, 0.0f }
+                                                , math::vector3d{ 1.0f, 0.0f, 0.0f } };
+
         REQUIRE(shapes::intersects(sphere, ray) == true);
+
+        auto possible_info = shapes::closest_intersection(sphere, ray);
+        REQUIRE(possible_info.is_initialized() == true);
+        REQUIRE(possible_info.get() == expected_info);
       }
     }
 
@@ -28,6 +35,9 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
       THEN("no intersection is found")
       {
         REQUIRE(shapes::intersects(sphere, ray) == false);
+
+        auto possible_info = shapes::closest_intersection(sphere, ray);
+        REQUIRE(possible_info.is_initialized() == false);
       }
     }
 
@@ -36,9 +46,16 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
       auto ray = math::ray3d{ math::point3d{ 0.0f, 2.0f, 0.0f }
                             , math::vector3d{ 0.0f, -1.0f, 0.0f } };
 
-      THEN("no intersection is found")
+      THEN("a intersection is found")
       {
+        core::intersection_info expected_info = { math::point3d{ 0.0f, 1.0f, 0.0f }
+                                                , math::vector3d{ 0.0f, 1.0f, 0.0f } };
+        
         REQUIRE(shapes::intersects(sphere, ray) == true);
+
+        auto possible_info = shapes::closest_intersection(sphere, ray);
+        REQUIRE(possible_info.is_initialized() == true);
+        REQUIRE(possible_info.get() == expected_info);
       }
     }
 
@@ -49,7 +66,14 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
 
       THEN("a intersection is found")
       {
+        core::intersection_info expected_info = { math::point3d{ 0.0f, 1.0f, 0.0f }
+                                                , math::vector3d{ 0.0f, 1.0f, 0.0f } };
+
         REQUIRE(shapes::intersects(sphere, ray) == true);
+
+        auto possible_info = shapes::closest_intersection(sphere, ray);
+        REQUIRE(possible_info.is_initialized() == true);
+        REQUIRE(possible_info.get() == expected_info);
       }
     }
 
@@ -60,7 +84,14 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
 
       THEN("a intersection is found")
       {
+        core::intersection_info expected_info = { math::point3d{ 0.0f, -1.0f, 0.0f }
+                                                , math::vector3d{ 0.0f, -1.0f, 0.0f } };
+
         REQUIRE(shapes::intersects(sphere, ray) == true);
+
+        auto possible_info = shapes::closest_intersection(sphere, ray);
+        REQUIRE(possible_info.is_initialized() == true);
+        REQUIRE(possible_info.get() == expected_info);
       }
     }
 
@@ -71,7 +102,14 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
 
       THEN("a intersection is found")
       {
+        core::intersection_info expected_info = { math::point3d{ 0.0f, 1.0f, 0.0f }
+                                                , math::vector3d{ 0.0f, 1.0f, 0.0f } };
+
         REQUIRE(shapes::intersects(sphere, ray) == true);
+
+        auto possible_info = shapes::closest_intersection(sphere, ray);
+        REQUIRE(possible_info.is_initialized() == true);
+        REQUIRE(possible_info.get() == expected_info);
       }
     }
 
@@ -80,9 +118,12 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
       auto ray = math::ray3d{ math::point3d{ 0.0f, 1.0f, 0.0f }
       , math::vector3d{ -1.0f, 0.0f, 0.0f } };
 
-      THEN("a intersection is found")
+      THEN("no intersection is found")
       {
-        REQUIRE(shapes::intersects(sphere, ray) == true);
+        REQUIRE(shapes::intersects(sphere, ray) == false);
+
+        auto possible_info = shapes::closest_intersection(sphere, ray);
+        REQUIRE(possible_info.is_initialized() == false);
       }
     }
 
@@ -91,9 +132,12 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
       auto ray = math::ray3d{ math::point3d{ 0.0f, 1.0f, 0.0f }
       , math::vector3d{ 0.0f, 1.0f, 0.0f } };
 
-      THEN("a intersection is found")
+      THEN("no intersection is found")
       {
-        REQUIRE(shapes::intersects(sphere, ray) == true);
+        REQUIRE(shapes::intersects(sphere, ray) == false);
+
+        auto possible_info = shapes::closest_intersection(sphere, ray);
+        REQUIRE(possible_info.is_initialized() == false);
       }
     }
 
@@ -104,7 +148,14 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
 
       THEN("a intersection is found")
       {
+        core::intersection_info expected_info = { math::point3d{ 0.0f, 1.0f, 0.0f }
+                                                , math::vector3d{ 0.0f, 1.0f, 0.0f } };
+
         REQUIRE(shapes::intersects(sphere, ray) == true);
+
+        auto possible_info = shapes::closest_intersection(sphere, ray);
+        REQUIRE(possible_info.is_initialized() == true);
+        REQUIRE(possible_info.get() == expected_info);
       }
     }
   }
