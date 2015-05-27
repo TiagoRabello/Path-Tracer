@@ -65,11 +65,9 @@ ENDIF( OPENGL_FOUND )
 # FIND Boost
 #########################################################
 FIND_PACKAGE(Boost 1.30.0 REQUIRED)
+INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
 
-IF(Boost_FOUND)
-  INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
-ENDIF()
-
+# Setup and Get Projects Sources/Headers
 INCLUDE_DIRECTORIES( ${MAIN_INCLUDE_DIR} )
 ADD_SUBDIRECTORY( ${MAIN_SOURCE_DIR} )
 
@@ -108,3 +106,6 @@ TARGET_LINK_LIBRARIES( ${TEST_NAME}
   ${LIB_NAME}
   ${Boost_LIBRARIES}
 )
+
+# Setup Projects Source Groups
+INCLUDE("${MAIN_SOURCE_DIR}/CMakeSourceGroups.txt")
