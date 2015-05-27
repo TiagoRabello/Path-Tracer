@@ -29,6 +29,7 @@ SOURCE_GROUP("math" FILES
 )
 
 SOURCE_GROUP("shapes" FILES
+  ${CMAKE_CURRENT_LIST_DIR}/shapes/intersection_info.hpp
   ${CMAKE_CURRENT_LIST_DIR}/shapes/sphere.hpp
 )
 
@@ -55,6 +56,7 @@ SET( LIB_SOURCES
   ${CMAKE_CURRENT_LIST_DIR}/math/utility.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/vector3d.hpp
 
+  ${CMAKE_CURRENT_LIST_DIR}/shapes/intersection_info.hpp
   ${CMAKE_CURRENT_LIST_DIR}/shapes/sphere.hpp
   PARENT_SCOPE
 )

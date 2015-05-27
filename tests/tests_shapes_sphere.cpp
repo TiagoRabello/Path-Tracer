@@ -1,6 +1,7 @@
 #include "shapes/sphere.hpp"
 
 #include "math/ray3d.hpp"
+#include "shapes/intersection_info.hpp"
 
 #include "catch.hpp"
 
@@ -16,8 +17,8 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
 
       THEN("a intersection is found")
       {
-        core::intersection_info expected_info = { math::point3d{ 1.0f, 0.0f, 0.0f }
-                                                , math::vector3d{ 1.0f, 0.0f, 0.0f } };
+        shapes::intersection_info expected_info = { math::point3d{ 1.0f, 0.0f, 0.0f }
+                                                  , math::vector3d{ 1.0f, 0.0f, 0.0f } };
 
         REQUIRE(shapes::intersects(sphere, ray) == true);
 
@@ -30,7 +31,7 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
     GIVEN("a ray starting from outside of the sphere and pointing at the oposite direction")
     {
       auto ray = math::ray3d{ math::point3d{ 0.0f, 2.0f, 0.0f }
-      , math::vector3d{ 0.0f, 1.0f, 0.0f } };
+                            , math::vector3d{ 0.0f, 1.0f, 0.0f } };
 
       THEN("no intersection is found")
       {
@@ -48,8 +49,8 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
 
       THEN("a intersection is found")
       {
-        core::intersection_info expected_info = { math::point3d{ 0.0f, 1.0f, 0.0f }
-                                                , math::vector3d{ 0.0f, 1.0f, 0.0f } };
+        shapes::intersection_info expected_info = { math::point3d{ 0.0f, 1.0f, 0.0f }
+                                                  , math::vector3d{ 0.0f, 1.0f, 0.0f } };
         
         REQUIRE(shapes::intersects(sphere, ray) == true);
 
@@ -62,12 +63,12 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
     GIVEN("a ray starting from inside the sphere and point at the oposite direction of the center")
     {
       auto ray = math::ray3d{ math::point3d{ 0.0f, 0.5f, 0.0f }
-      , math::vector3d{ 0.0f, 1.0f, 0.0f } };
+                            , math::vector3d{ 0.0f, 1.0f, 0.0f } };
 
       THEN("a intersection is found")
       {
-        core::intersection_info expected_info = { math::point3d{ 0.0f, 1.0f, 0.0f }
-                                                , math::vector3d{ 0.0f, 1.0f, 0.0f } };
+        shapes::intersection_info expected_info = { math::point3d{ 0.0f, 1.0f, 0.0f }
+                                                  , math::vector3d{ 0.0f, 1.0f, 0.0f } };
 
         REQUIRE(shapes::intersects(sphere, ray) == true);
 
@@ -80,12 +81,12 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
     GIVEN("a ray starting from inside the sphere and point at the direction of the center")
     {
       auto ray = math::ray3d{ math::point3d{ 0.0f, 0.5f, 0.0f }
-      , math::vector3d{ 0.0f, -1.0f, 0.0f } };
+                            , math::vector3d{ 0.0f, -1.0f, 0.0f } };
 
       THEN("a intersection is found")
       {
-        core::intersection_info expected_info = { math::point3d{ 0.0f, -1.0f, 0.0f }
-                                                , math::vector3d{ 0.0f, -1.0f, 0.0f } };
+        shapes::intersection_info expected_info = { math::point3d{ 0.0f, -1.0f, 0.0f }
+                                                  , math::vector3d{ 0.0f, -1.0f, 0.0f } };
 
         REQUIRE(shapes::intersects(sphere, ray) == true);
 
@@ -98,12 +99,12 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
     GIVEN("a tangent ray to the sphere's surface")
     {
       auto ray = math::ray3d{ math::point3d{ 1.0f, 1.0f, 0.0f }
-      , math::vector3d{ -1.0f, 0.0f, 0.0f } };
+                            , math::vector3d{ -1.0f, 0.0f, 0.0f } };
 
       THEN("a intersection is found")
       {
-        core::intersection_info expected_info = { math::point3d{ 0.0f, 1.0f, 0.0f }
-                                                , math::vector3d{ 0.0f, 1.0f, 0.0f } };
+        shapes::intersection_info expected_info = { math::point3d{ 0.0f, 1.0f, 0.0f }
+                                                  , math::vector3d{ 0.0f, 1.0f, 0.0f } };
 
         REQUIRE(shapes::intersects(sphere, ray) == true);
 
@@ -116,7 +117,7 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
     GIVEN("a tangent ray starting from the sphere surface")
     {
       auto ray = math::ray3d{ math::point3d{ 0.0f, 1.0f, 0.0f }
-      , math::vector3d{ -1.0f, 0.0f, 0.0f } };
+                            , math::vector3d{ -1.0f, 0.0f, 0.0f } };
 
       THEN("no intersection is found")
       {
@@ -130,7 +131,7 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
     GIVEN("a ray starting from the sphere's surface and pointing to the outside")
     {
       auto ray = math::ray3d{ math::point3d{ 0.0f, 1.0f, 0.0f }
-      , math::vector3d{ 0.0f, 1.0f, 0.0f } };
+                            , math::vector3d{ 0.0f, 1.0f, 0.0f } };
 
       THEN("no intersection is found")
       {
@@ -144,12 +145,12 @@ SCENARIO("We can test spheres for intersection with rays", "[shapes][sphere]")
     GIVEN("a ray starting from the sphere's surface and pointing to the inside")
     {
       auto ray = math::ray3d{ math::point3d{ 0.0f, 1.0f, 0.0f }
-      , math::vector3d{ 0.0f, -1.0f, 0.0f } };
+                            , math::vector3d{ 0.0f, -1.0f, 0.0f } };
 
       THEN("a intersection is found")
       {
-        core::intersection_info expected_info = { math::point3d{ 0.0f, 1.0f, 0.0f }
-                                                , math::vector3d{ 0.0f, 1.0f, 0.0f } };
+        shapes::intersection_info expected_info = { math::point3d{ 0.0f, 1.0f, 0.0f }
+                                                  , math::vector3d{ 0.0f, 1.0f, 0.0f } };
 
         REQUIRE(shapes::intersects(sphere, ray) == true);
 

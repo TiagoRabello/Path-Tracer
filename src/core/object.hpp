@@ -2,7 +2,9 @@
 #define CORE_OBJECT_HPP
 
 #include "material.hpp"
+
 #include <math/ray3d.hpp>
+#include <shapes/intersection_info.hpp>
 #include <shapes/sphere.hpp>
 
 #include <boost/optional.hpp>
@@ -34,7 +36,7 @@ inline bool intersects(const object& obj, math::ray3d ray)
   return shapes::intersects(obj.shape, ray);
 }
 
-inline boost::optional<intersection_info> closest_intersection(const object& obj, math::ray3d ray)
+inline boost::optional<shapes::intersection_info> closest_intersection(const object& obj, math::ray3d ray)
 {
   return shapes::closest_intersection(obj.shape, ray);
 }

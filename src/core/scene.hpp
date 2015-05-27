@@ -1,6 +1,7 @@
 #ifndef CORE_SCENE_HPP
 #define CORE_SCENE_HPP
 
+#include "intersection_info.hpp"
 #include "object.hpp"
 
 #include <lights/point_light.hpp>
@@ -23,17 +24,11 @@ class scene
 
 public:
 
-  struct intersection_info
-  {
-    core::intersection_info shape_info;
-    const object *obj;
-  };
-
   void add(const object& obj) { objects.push_back(obj); }
   void add(lights::point_light light) { lights.push_back(light); }
 
   friend bool intersects(const scene& scene, math::ray3d ray);
-  friend boost::optional<scene::intersection_info> closest_intersection(const scene& scene, math::ray3d ray);
+  friend boost::optional<core::intersection_info> closest_intersection(const scene& scene, math::ray3d ray);
 };
 
 inline bool intersects(const scene& scene, math::ray3d ray)
@@ -43,9 +38,9 @@ inline bool intersects(const scene& scene, math::ray3d ray)
   });
 }
 
-inline boost::optional<scene::intersection_info> closest_intersection(const scene& scene, math::ray3d ray)
+inline boost::optional<core::intersection_info> closest_intersection(const scene& scene, math::ray3d ray)
 {
-  scene::intersection_info info;
+  core::intersection_info info;
   float min_dist = std::numeric_limits<float>::infinity();
 
   for (auto &obj : scene.objects)

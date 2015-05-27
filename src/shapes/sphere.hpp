@@ -1,7 +1,7 @@
 #ifndef SHAPES_SPHERE_HPP
 #define SHAPES_SPHERE_HPP
 
-#include <core/intersection_info.hpp>
+#include "intersection_info.hpp"
 
 #include <math/point3d.hpp>
 #include <math/ray3d.hpp>
@@ -60,7 +60,7 @@ inline bool intersects(shapes::sphere sphere, math::ray3d ray)
 // Note:
 //  If ray origin is on the surface of the sphere and ray direction points
 //  to the outside, no intersection is found.
-inline boost::optional<core::intersection_info> closest_intersection(shapes::sphere sphere, math::ray3d ray)
+inline boost::optional<shapes::intersection_info> closest_intersection(shapes::sphere sphere, math::ray3d ray)
 {
   const auto L = math::make_vector3d(ray.origin, sphere.center);
   const auto tPX = math::dot(L, ray.direction);
@@ -85,7 +85,7 @@ inline boost::optional<core::intersection_info> closest_intersection(shapes::sph
     t = tPX + sqrt(squared_radius - dsq);
   }
 
-  core::intersection_info info;
+  shapes::intersection_info info;
   info.point = math::translated(ray.origin, math::scaled(ray.direction, t));
   info.normal = math::normalized(math::make_vector3d(sphere.center, info.point));
   return info;
