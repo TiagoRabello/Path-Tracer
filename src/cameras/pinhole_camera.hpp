@@ -40,6 +40,9 @@ public:
                , float          film_width
                , float          film_height);
 
+  float get_width() const { return film_width; }
+  float get_height() const { return film_height; }
+
   math::ray3d generate_ray(float film_x, float film_y) const;
 };
 
