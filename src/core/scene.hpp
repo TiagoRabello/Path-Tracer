@@ -4,6 +4,7 @@
 #include "intersection_info.hpp"
 #include "object.hpp"
 
+#include <graphics/color.hpp>
 #include <lights/point_light.hpp>
 #include <math/ray3d.hpp>
 
@@ -23,6 +24,8 @@ class scene
   std::vector<lights::point_light> lights;
 
 public:
+
+  graphics::color background_color;
 
   void add(const object& obj) { objects.push_back(obj); }
   void add(lights::point_light light) { lights.push_back(light); }
