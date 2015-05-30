@@ -33,6 +33,9 @@ public:
   friend boost::optional<core::intersection_info> closest_intersection(const scene& scene, math::ray3d ray);
 };
 
+bool intersects(const scene& scene, math::ray3d ray);
+boost::optional<core::intersection_info> closest_intersection(const scene& scene, math::ray3d ray);
+
 }
 
 
