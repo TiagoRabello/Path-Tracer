@@ -27,6 +27,7 @@ SET( LIB_SOURCES
   ${CMAKE_CURRENT_LIST_DIR}/renderers/normal_renderer.hpp
 
   ${CMAKE_CURRENT_LIST_DIR}/shapes/intersection_info.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/shapes/sphere.cpp
   ${CMAKE_CURRENT_LIST_DIR}/shapes/sphere.hpp
   PARENT_SCOPE
 )
