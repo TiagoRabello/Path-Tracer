@@ -43,3 +43,7 @@ SOURCE_GROUP("Header Files\\shapes" FILES
   ${CMAKE_CURRENT_LIST_DIR}/shapes/intersection_info.hpp
   ${CMAKE_CURRENT_LIST_DIR}/shapes/sphere.hpp
 )
+
+SOURCE_GROUP("Header Files\\renderers" FILES
+  ${CMAKE_CURRENT_LIST_DIR}/renderers/normal_renderer.hpp
+)
