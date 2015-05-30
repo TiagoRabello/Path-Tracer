@@ -1,4 +1,5 @@
 #include <core/scene.hpp>
+#include <core/intersection_info.hpp>
 
 #include "catch.hpp"
 
