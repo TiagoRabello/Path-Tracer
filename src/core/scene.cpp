@@ -14,19 +14,19 @@
 namespace core
 {
 
-bool intersects(const scene& scene, math::ray3d ray)
+bool intersects(const scene& scn, math::ray3d ray)
 {
-  return std::any_of(std::begin(scene.objects), std::end(scene.objects), [=](const object& obj){
+  return std::any_of(std::begin(scn.objects), std::end(scn.objects), [=](const object& obj){
     return intersects(obj, ray);
   });
 }
 
-boost::optional<core::intersection_info> closest_intersection(const scene& scene, math::ray3d ray)
+boost::optional<core::intersection_info> closest_intersection(const scene& scn, math::ray3d ray)
 {
   core::intersection_info info;
   float min_dist = std::numeric_limits<float>::infinity();
 
-  for (auto &obj : scene.objects)
+  for (auto &obj : scn.objects)
   {
     auto possible_inter = closest_intersection(obj, ray);
 

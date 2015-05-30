@@ -33,14 +33,14 @@ inline bool operator!=(sphere lhs, sphere rhs)
 // Note:
 //  If ray origin is on the surface of the sphere and ray direction points
 //  to the outside, no intersection is found.
-bool intersects(shapes::sphere sphere, math::ray3d ray);
+bool intersects(shapes::sphere shape, math::ray3d ray);
 
 // Returns the closest intersection point between ray and sphere.
 //
 // Note:
 //  If ray origin is on the surface of the sphere and ray direction points
 //  to the outside, no intersection is found.
-boost::optional<shapes::intersection_info> closest_intersection(shapes::sphere sphere, math::ray3d ray);
+boost::optional<shapes::intersection_info> closest_intersection(shapes::sphere shape, math::ray3d ray);
 
 }
 

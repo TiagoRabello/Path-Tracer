@@ -20,13 +20,13 @@ namespace shapes
 // Note:
 //  If ray origin is on the surface of the sphere and ray direction points
 //  to the outside, no intersection is found.
-bool intersects(shapes::sphere sphere, math::ray3d ray)
+bool intersects(shapes::sphere shape, math::ray3d ray)
 {
-  const auto L = math::make_vector3d(ray.origin, sphere.center);
+  const auto L = math::make_vector3d(ray.origin, shape.center);
   const auto tPX = math::dot(L, ray.direction);
 
   const auto orig_center_sqrd_dist = math::squared_length(L);
-  const auto squared_radius = sphere.radius * sphere.radius;
+  const auto squared_radius = shape.radius * shape.radius;
 
   // Ray origin is inside sphere.
   if (orig_center_sqrd_dist < squared_radius) { return true; }
@@ -43,13 +43,13 @@ bool intersects(shapes::sphere sphere, math::ray3d ray)
 // Note:
 //  If ray origin is on the surface of the sphere and ray direction points
 //  to the outside, no intersection is found.
-boost::optional<shapes::intersection_info> closest_intersection(shapes::sphere sphere, math::ray3d ray)
+boost::optional<shapes::intersection_info> closest_intersection(shapes::sphere shape, math::ray3d ray)
 {
-  const auto L = math::make_vector3d(ray.origin, sphere.center);
+  const auto L = math::make_vector3d(ray.origin, shape.center);
   const auto tPX = math::dot(L, ray.direction);
 
   const auto orig_center_sqrd_dist = math::squared_length(L);
-  const auto squared_radius = sphere.radius * sphere.radius;
+  const auto squared_radius = shape.radius * shape.radius;
   const auto origin_inside_sphere = orig_center_sqrd_dist < squared_radius;
 
   // Sphere center is behind ray origin.
@@ -70,7 +70,7 @@ boost::optional<shapes::intersection_info> closest_intersection(shapes::sphere s
 
   shapes::intersection_info info;
   info.point = math::translated(ray.origin, math::scaled(ray.direction, t));
-  info.normal = math::normalized(math::make_vector3d(sphere.center, info.point));
+  info.normal = math::normalized(math::make_vector3d(shape.center, info.point));
   return info;
 }
 
