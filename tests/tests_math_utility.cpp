@@ -22,7 +22,7 @@ SCENARIO("We can translate a point", "[math][utility]")
 {
   GIVEN("a valid point in 3d space")
   {
-    auto point  = math::point3d{ 0.0f, 0.0f, 0.0f };
+    auto point = math::point3d{ 0.0f, 0.0f, 0.0f };
 
     GIVEN("a valid vector vector in 3d space")
     {
@@ -42,6 +42,82 @@ SCENARIO("We can translate a point", "[math][utility]")
       THEN("translated point must be equal to original point")
       {
         REQUIRE(math::translated(point, vector) == point);
+      }
+    }
+  }
+}
+
+SCENARIO("We can project a vector into other vectors", "[math][utility]")
+{
+  GIVEN("a vector in 3d space")
+  {
+    auto vector = math::vector3d{ 1.0f, 1.0f, 2.0f };
+    GIVEN("the x axis")
+    {
+      auto x_axis = math::vector3d{ 1.0f, 0.0f, 0.0f };
+
+      THEN("we can create a vector that is the projection of the original into the x axis")
+      {
+        auto result = math::vector3d{ 1.0f, 0.0f, 0.0f };
+        REQUIRE(math::projected(vector, x_axis) == result);
+      }
+    }
+    GIVEN("the y axis")
+    {
+      auto y_axis = math::vector3d{ 0.0f, 1.0f, 0.0f };
+
+      THEN("we can create a vector that is the projection of the original into the y axis")
+      {
+        auto result = math::vector3d{ 0.0f, 1.0f, 0.0f };
+        REQUIRE(math::projected(vector, y_axis) == result);
+      }
+    }
+    GIVEN("the z axis")
+    {
+      auto z_axis = math::vector3d{ 0.0f, 0.0f, 1.0f };
+
+      THEN("we can create a vector that is the projection of the original into the z axis")
+      {
+        auto result = math::vector3d{ 0.0f, 0.0f, 2.0f };
+        REQUIRE(math::projected(vector, z_axis) == result);
+      }
+    }
+  }
+}
+
+SCENARIO("We can reflect a vector around an axis", "[math][utility]")
+{
+  GIVEN("a vector in 3d space")
+  {
+    auto vector = math::vector3d{ 1.0f, 1.0f, 2.0f };
+    GIVEN("the x axis")
+    {
+      auto x_axis = math::vector3d{ 1.0f, 0.0f, 0.0f };
+
+      THEN("we can create a vector that is the reflection of the original around the x axis")
+      {
+        auto result = math::vector3d{ 1.0f, -1.0f, -2.0f };
+        REQUIRE(math::reflected(vector, x_axis) == result);
+      }
+    }
+    GIVEN("the y axis")
+    {
+      auto y_axis = math::vector3d{ 0.0f, 1.0f, 0.0f };
+
+      THEN("we can create a vector that is the reflection of the original around the y axis")
+      {
+        auto result = math::vector3d{ -1.0f, 1.0f, -2.0f };
+        REQUIRE(math::reflected(vector, y_axis) == result);
+      }
+    }
+    GIVEN("the z axis")
+    {
+      auto z_axis = math::vector3d{ 0.0f, 0.0f, 1.0f };
+
+      THEN("we can create a vector that is the reflection of the original around the z axis")
+      {
+        auto result = math::vector3d{ -1.0f, -1.0f, 2.0f };
+        REQUIRE(math::reflected(vector, z_axis) == result);
       }
     }
   }

@@ -17,6 +17,17 @@ inline point3d translated(point3d point, vector3d direction)
   return{ point.x + direction.x, point.y + direction.y, point.z + direction.z };
 }
 
+inline vector3d projected(vector3d vector, vector3d direction)
+{
+  return scaled(direction, dot(vector, direction));
+}
+
+inline vector3d reflected(vector3d vector, vector3d axis)
+{
+  auto parallel = projected(vector, axis);
+  return parallel + (parallel - vector);
+}
+
 }
 
 #endif
