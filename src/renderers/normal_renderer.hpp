@@ -1,8 +1,6 @@
 #ifndef RENDERERS_NORMAL_RENDERER
 #define RENDERERS_NORMAL_RENDERER
 
-#include <cameras/pinhole_camera.hpp>
-#include <core/scene.hpp>
 #include <core/intersection_info.hpp>
 #include <graphics/color.hpp>
 
@@ -36,7 +34,7 @@ struct normal_renderer
       for (int x = 0; x < width; ++x)
       {
         const auto ray = camera.generate_ray(float(x), float(y));
-        const auto closest_inter = core::closest_intersection(scene, ray);
+        const auto closest_inter = closest_intersection(scene, ray);
 
         graphics::color color;
         if (closest_inter.is_initialized())
