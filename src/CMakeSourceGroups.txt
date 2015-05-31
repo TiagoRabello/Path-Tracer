@@ -50,4 +50,5 @@ SOURCE_GROUP("Source Files\\shapes" FILES
 
 SOURCE_GROUP("Header Files\\renderers" FILES
   ${CMAKE_CURRENT_LIST_DIR}/renderers/normal_renderer.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/renderers/raycaster.hpp
 )
