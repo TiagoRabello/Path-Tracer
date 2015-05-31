@@ -1,14 +1,23 @@
+#include <cameras/pinhole_camera.hpp>
+#include <core/scene.hpp>
+#include <films/component_buffer_film.hpp>
+#include <graphics/color.hpp>
+#include <renderers/normal_renderer.hpp>
+
 #include <GLFW/glfw3.h>
 
+#include <algorithm>
 #include <cstdlib> // For std::abort
 #include <iostream>
+#include <iterator>
+#include <vector>
 
 namespace
 {
 
 const auto screen_width = 640;
 const auto screen_height = 480;
-const auto screen_title = "path_tracer";
+const auto screen_title = "path_tracer_demo";
 
 void log_on_error(int error_code, const char *error_description)
 {
@@ -21,35 +30,61 @@ void abort_on_error(int error_code, const char *error_description)
   std::abort();
 }
 
+core::scene scene;
+renderers::normal_renderer render;
+films::component_buffer_film film{ screen_width, screen_height };
+
+const auto eye = math::point3d{ -10.0f, 1.0f, 0.0f };
+const auto at = math::point3d{ 0.0f, 1.0f, 0.0f };
+const auto up = math::vector3d{ 0.0f, 1.0f, 0.0f };
+const auto fovy = math::degrees{ 45.0f };
+const auto nearp = 0.1f;
+const auto farp = 100.0f;
+const auto film_width = float(screen_width);
+const auto film_height = float(screen_height);
+
+cameras::pinhole_camera camera{ eye, at, up, fovy, nearp, farp, film_width, film_height };
+
+void init_demo_state()
+{
+  // Setup demo scene
+  scene.background_color.red = 0.5f;
+  scene.background_color.green = 0.5f;
+  scene.background_color.blue = 0.5f;
+
+  core::object obj1;
+  obj1.shape = { { 0.0f, 0.0f, 0.0f }, 1.0f };
+  obj1.material = {};
+  scene.add(obj1);
+
+  core::object obj2;
+  obj2.shape = { { 0.0f, 2.0f, 0.0f }, 1.0f };
+  obj2.material = {};
+  scene.add(obj2);
+
+  // Setup OpenGL
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+}
+
 void framebuffer_size_callback(GLFWwindow * /*window*/, int width, int height)
 {
   glViewport(0, 0, width, height);
+  camera = { eye, at, up, fovy, nearp, farp, float(width), float(height) };
+  film.resize(width, height);
 }
 
 void render_frame()
 {
-  int width, height;
-  glfwGetFramebufferSize(glfwGetCurrentContext(), &width, &height);
-  float ratio = width / (float)height;
+  render(camera, scene, film);
 
+  static_assert(films::component_buffer_film::pixel_depth == 4,
+                "glDrawPixels is using RGBA so film must have pixel depth equal to 4.");
   glClear(GL_COLOR_BUFFER_BIT);
-
-  glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-
-  glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glRotatef((float)glfwGetTime() * 50.f, 0.f, 0.f, 1.f);
-
-  glBegin(GL_TRIANGLES);
-    glColor3f(1.f, 0.f, 0.f);
-    glVertex3f(-0.6f, -0.4f, 0.f);
-    glColor3f(0.f, 1.f, 0.f);
-    glVertex3f(0.6f, -0.4f, 0.f);
-    glColor3f(0.f, 0.f, 1.f);
-    glVertex3f(0.f, 0.6f, 0.f);
-  glEnd();
+  glDrawPixels(film.get_width(), film.get_height(), GL_RGBA, GL_FLOAT, film.get_buffer());
 }
 
 }
@@ -68,6 +103,8 @@ int main()
 
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
   glfwMakeContextCurrent(window);
+
+  init_demo_state();
 
   while (!glfwWindowShouldClose(window))
   {
