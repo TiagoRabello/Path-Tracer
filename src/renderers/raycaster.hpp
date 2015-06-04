@@ -21,6 +21,8 @@ struct raycaster
     color.green = 0.0f;
     color.blue = 0.0f;
 
+    const auto specular_vector = math::reflected(-ray.direction, info.shape_info.normal);
+
     for (auto& light : scene.get_lights())
     {
       auto light_vector = math::make_vector3d(info.shape_info.point, light.position);
@@ -46,9 +48,7 @@ struct raycaster
       color.blue += light.color.blue * info.obj->material.diffuse_color.blue * cossine;
 
       // Calculate specular component
-      auto point_eye = -ray.direction;
-      light_vector = math::reflected(light_vector, info.shape_info.normal);
-      cossine = math::dot(point_eye, light_vector);
+      cossine = math::dot(specular_vector, light_vector);
       cossine = std::pow(cossine, info.obj->material.specular_exponent);
 
       color.red += light.color.red * info.obj->material.specular_color.red * cossine;
