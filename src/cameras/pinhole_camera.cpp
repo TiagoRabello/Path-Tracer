@@ -52,10 +52,10 @@ namespace cameras
     return ray;
   }
 
-  void pinhole_camera::resize(float film_width, float film_height)
+  void pinhole_camera::resize(float film_w, float film_h)
   {
-    this->film_width = film_width;
-    this->film_height = film_height;
+    this->film_width = film_w;
+    this->film_height = film_h;
 
     math::vector3d z_axis = math::normalized(math::make_vector3d(at, eye));
     math::vector3d x_axis = math::normalized(math::cross(up, z_axis));
