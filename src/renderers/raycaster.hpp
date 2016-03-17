@@ -2,6 +2,7 @@
 #define RENDERERS_RAYCASTER
 
 #include <core/intersection_info.hpp>
+#include <core/material.hpp>
 #include <graphics/color.hpp>
 #include <math/vector3d.hpp>
 #include <math/utility.hpp>
@@ -16,10 +17,7 @@ struct raycaster
   template<typename SceneType>
   graphics::color shade(SceneType&& scene, math::ray3d ray, const core::intersection_info& info) const
   {
-    graphics::color color;
-    color.red = 0.0f;
-    color.green = 0.0f;
-    color.blue = 0.0f;
+    graphics::color color = {};
 
     const auto specular_vector = math::reflected(-ray.direction, info.shape_info.normal);
 
@@ -39,21 +37,14 @@ struct raycaster
         continue;
       }
 
-      // Calculate diffuse component
+      // Avoid lighting from behind
       auto cossine = math::dot(info.shape_info.normal, light_vector);
-      if (cossine < 0.0f) { continue; } // Light coming from behind
+      if (cossine < 0.0f) { continue; }
 
-      color.red += light.color.red * info.obj->material.diffuse_color.red * cossine;
-      color.green += light.color.green * info.obj->material.diffuse_color.green * cossine;
-      color.blue += light.color.blue * info.obj->material.diffuse_color.blue * cossine;
-
-      // Calculate specular component
-      cossine = math::dot(specular_vector, light_vector);
-      cossine = std::pow(cossine, info.obj->material.specular_exponent);
-
-      color.red += light.color.red * info.obj->material.specular_color.red * cossine;
-      color.green += light.color.green * info.obj->material.specular_color.green * cossine;
-      color.blue += light.color.blue * info.obj->material.specular_color.blue * cossine;
+      // Calculate light contribution
+      const auto diffuse  = core::diffuse_reflection(info.obj->material, ray.direction, light_vector, info.shape_info.normal);
+      const auto specular = core::specular_reflection(info.obj->material, ray.direction, light_vector, info.shape_info.normal);
+      color += light.color * (diffuse + specular);
     }
 
     return color;

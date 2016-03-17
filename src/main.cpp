@@ -54,29 +54,12 @@ cameras::pinhole_camera camera{ eye, at, up, fovy, nearp, farp, film_width, film
 void init_demo_state()
 {
   // Setup demo scene
-  scene.background_color.red = 0.5f;
-  scene.background_color.green = 0.5f;
-  scene.background_color.blue = 0.5f;
+  scene.background_color = { 0.5f, 0.5f, 0.5f };
 
-  graphics::color red;
-  red.red = 1.0f;
-  red.green = 0.0f;
-  red.blue = 0.0f;
-
-  graphics::color green;
-  green.red = 0.0f;
-  green.green = 1.0f;
-  green.blue = 0.0f;
-
-  graphics::color blue;
-  blue.red = 0.0f;
-  blue.green = 0.0f;
-  blue.blue = 1.0f;
-
-  graphics::color white;
-  white.red = 1.0f;
-  white.green = 1.0f;
-  white.blue = 1.0f;
+  const graphics::color red   = { 1.0f, 0.0f, 0.0f };
+  const graphics::color green = { 0.0f, 1.0f, 0.0f };
+  const graphics::color blue  = { 0.0f, 0.0f, 1.0f };
+  const graphics::color white = { 1.0f, 1.0f, 1.0f };
 
   core::object obj1;
   obj1.shape = { { 0.0f, 0.0f, -1.0f }, 1.0f };
@@ -123,10 +106,10 @@ void render_frame()
       break;
   }
 
-  static_assert(films::component_buffer_film::pixel_depth == 4,
-                "glDrawPixels is using RGBA so film must have pixel depth equal to 4.");
+  static_assert(films::component_buffer_film::pixel_depth == 3,
+                "glDrawPixels is using RGBA so film must have pixel depth equal to 3.");
   glClear(GL_COLOR_BUFFER_BIT);
-  glDrawPixels(film.get_width(), film.get_height(), GL_RGBA, GL_FLOAT, film.get_buffer());
+  glDrawPixels(film.get_width(), film.get_height(), GL_RGB, GL_FLOAT, film.get_buffer());
 }
 
 void keyboard_cb(GLFWwindow *, int key, int, int action, int)
