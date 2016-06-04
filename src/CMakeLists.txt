@@ -11,11 +11,12 @@ SET( LIB_SOURCES
   ${CMAKE_CURRENT_LIST_DIR}/core/scene.hpp
 
   ${CMAKE_CURRENT_LIST_DIR}/films/component_buffer_film.hpp
-  
+
   ${CMAKE_CURRENT_LIST_DIR}/graphics/color.hpp
 
   ${CMAKE_CURRENT_LIST_DIR}/lights/point_light.hpp
-  
+
+  ${CMAKE_CURRENT_LIST_DIR}/math/coordinate_system.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/degrees.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/point3d.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/radians.hpp

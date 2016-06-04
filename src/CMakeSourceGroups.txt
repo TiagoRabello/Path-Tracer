@@ -30,6 +30,7 @@ SOURCE_GROUP("Header Files\\lights" FILES
 )
 
 SOURCE_GROUP("Header Files\\math" FILES
+  ${CMAKE_CURRENT_LIST_DIR}/math/coordinate_system.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/degrees.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/point3d.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/radians.hpp
