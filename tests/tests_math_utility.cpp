@@ -122,3 +122,27 @@ SCENARIO("We can reflect a vector around an axis", "[math][utility]")
     }
   }
 }
+
+SCENARIO("We can generate an unit random unit vector with positive z for any orthogonal coordinate space", "[math][utility]")
+{
+  const auto num_repetitions = 2000;
+  std::random_device r;
+  std::default_random_engine gen(r());
+
+  GIVEN("a orthogonal coordinate system in 3d space")
+  {
+    const auto y = math::vector3d{ 0.0f, 1.0f, 0.0f };
+    const auto system = math::make_coordinate_system(y);
+
+    THEN("we can generate a stream of random unit vectors")
+    {
+      for (int i = 0; i < num_repetitions; i++)
+      {
+        const auto rand_vec = math::generate_unit_vector3d(gen, system);
+
+        REQUIRE(std::abs(math::length(rand_vec) - 1.0f) < 1e-6);
+        REQUIRE(math::dot(rand_vec, y) >= 0.0f);
+      }
+    }
+  }
+}

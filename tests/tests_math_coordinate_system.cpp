@@ -1,5 +1,6 @@
 #include "math/coordinate_system.hpp"
 
+#include <cmath>
 #include <vector>
 
 #include "catch.hpp"

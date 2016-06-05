@@ -1,8 +1,13 @@
 #ifndef MATH_UTILITY_HPP
 #define MATH_UTILITY_HPP
 
+#include "coordinate_system.hpp"
 #include "point3d.hpp"
+#include "radians.hpp"
+#include "trigonometry.hpp"
 #include "vector3d.hpp"
+
+#include <random>
 
 namespace math
 {
@@ -26,6 +31,30 @@ inline vector3d reflected(vector3d vector, vector3d axis)
 {
   auto parallel = projected(vector, axis);
   return parallel + (parallel - vector);
+}
+
+template<typename RandEng>
+inline vector3d generate_unit_vector3d(RandEng&& gen, coordinate_system coord_system)
+{
+  auto generate_theta = [&]()
+  {
+    static std::uniform_real_distribution<float> dist(0.0f, 2.0f * math::pi);
+    return math::radians{ dist(gen) };
+  };
+
+  auto generate_u = [&]()
+  {
+    static std::uniform_real_distribution<float> dist(0.0f, 1.0f);
+    return dist(gen);
+  };
+
+  const auto theta = generate_theta();
+  const auto u = generate_u();
+  const auto delta = std::sqrt(1.0f - u * u);
+
+  return math::scaled(coord_system.v1, delta * math::cos(theta))
+       + math::scaled(coord_system.v2, u)
+       + math::scaled(coord_system.v3, delta * math::sin(theta));
 }
 
 }
