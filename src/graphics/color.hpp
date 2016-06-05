@@ -52,6 +52,11 @@ inline color operator*(color lhs, color rhs)
   return{ lhs.red * rhs.red, lhs.green * rhs.green, lhs.blue * rhs.blue };
 }
 
+inline color operator/(color lhs, float rhs)
+{
+  return{ lhs.red / rhs, lhs.green / rhs, lhs.blue / rhs };
+}
+
 inline bool operator==(color lhs, color rhs)
 {
   return std::tie(lhs.red, lhs.green, lhs.blue)
