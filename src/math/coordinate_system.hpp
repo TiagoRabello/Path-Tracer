@@ -19,15 +19,15 @@ namespace math
     if (std::abs(v1.x) > std::abs(v1.y))
     {
       float inv_length = 1.0f / std::sqrt(v1.x * v1.x + v1.z * v1.z);
-      v2 = { -v1.z * inv_length, 0.0f, v1.x * inv_length };
+      v2 = { v1.z * inv_length, 0.0f, -v1.x * inv_length };
     }
     else
     {
       float inv_length = 1.0f / std::sqrt(v1.y * v1.y + v1.z * v1.z);
-      v2 = { 0.0f, v1.z * inv_length, -v1.y * inv_length };
+      v2 = { 0.0f, -v1.z * inv_length, v1.y * inv_length };
     }
 
-    return{ v1, v2, math::cross(v1, v2) };
+    return{ math::cross(v1, v2), v1, v2 };
   }
 }
 
