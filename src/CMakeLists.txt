@@ -18,6 +18,7 @@ SET( LIB_SOURCES
 
   ${CMAKE_CURRENT_LIST_DIR}/math/coordinate_system.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/degrees.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/math/monte_carlo_integrator.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/point3d.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/radians.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/ray3d.hpp
@@ -27,6 +28,7 @@ SET( LIB_SOURCES
 
   ${CMAKE_CURRENT_LIST_DIR}/renderers/normal_renderer.hpp
   ${CMAKE_CURRENT_LIST_DIR}/renderers/raycaster.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/renderers/path_tracer.hpp
 
   ${CMAKE_CURRENT_LIST_DIR}/shapes/intersection_info.hpp
   ${CMAKE_CURRENT_LIST_DIR}/shapes/sphere.cpp

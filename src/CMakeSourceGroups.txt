@@ -32,6 +32,7 @@ SOURCE_GROUP("Header Files\\lights" FILES
 SOURCE_GROUP("Header Files\\math" FILES
   ${CMAKE_CURRENT_LIST_DIR}/math/coordinate_system.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/degrees.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/math/monte_carlo_integrator.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/point3d.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/radians.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/ray3d.hpp
@@ -52,4 +53,5 @@ SOURCE_GROUP("Source Files\\shapes" FILES
 SOURCE_GROUP("Header Files\\renderers" FILES
   ${CMAKE_CURRENT_LIST_DIR}/renderers/normal_renderer.hpp
   ${CMAKE_CURRENT_LIST_DIR}/renderers/raycaster.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/renderers/path_tracer.hpp
 )

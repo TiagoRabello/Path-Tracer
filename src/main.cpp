@@ -3,6 +3,7 @@
 #include <films/component_buffer_film.hpp>
 #include <graphics/color.hpp>
 #include <renderers/normal_renderer.hpp>
+#include <renderers/path_tracer.hpp>
 #include <renderers/raycaster.hpp>
 
 #include <GLFW/glfw3.h>
@@ -30,12 +31,14 @@ void abort_on_error(int error_code, const char *error_description)
 enum class render_mode
 {
   normals_only,
-  non_recursive
+  non_recursive,
+  global
 };
 
 render_mode mode = render_mode::non_recursive;
 renderers::normal_renderer render_normal;
 renderers::raycaster render;
+renderers::path_tracer render_global;
 
 core::scene scene;
 films::component_buffer_film film{ screen_width, screen_height };
@@ -62,21 +65,29 @@ void init_demo_state()
   const graphics::color white = { 1.0f, 1.0f, 1.0f };
 
   core::object obj1;
-  obj1.shape = { { 0.0f, 0.0f, -1.0f }, 1.0f };
+  obj1.shape = { { 0.0f, 0.0f, -1.5f }, 1.0f };
   obj1.material = { red, white, 5 };
   scene.add(obj1);
 
   core::object obj2;
-  obj2.shape = { { 0.0f, 1.75f, 0.0f }, 1.0f };
+  obj2.shape = { { 0.0f, 1.5f, 0.0f }, 1.0f };
   obj2.material = { green, white, 5 };
   scene.add(obj2);
 
   core::object obj3;
-  obj3.shape = { { 0.0f, 0.0f, 1.0f }, 1.0f };
+  obj3.shape = { { 0.0f, 0.0f, 1.5f }, 1.0f };
   obj3.material = { blue, white, 5 };
   scene.add(obj3);
 
-  lights::point_light light{ { -2.0f, 5.0f, 5.0f }, white };
+  core::object obj4;
+  obj4.shape = { { 1.0f, 0.0f, 0.0f }, 1.0f };
+  obj4.material = { white, white, 5 };
+  scene.add(obj4);
+
+  //lights::point_light light{ { -2.0f, 5.0f, 5.0f }, white };
+  //scene.add(light);
+
+  lights::point_light light{ { -1.0f, 0.0f, 0.0f }, white };
   scene.add(light);
 
   // Setup OpenGL
@@ -104,6 +115,9 @@ void render_frame()
     case render_mode::non_recursive:
       render(camera, scene, film);
       break;
+    case render_mode::global:
+      render_global(camera, scene, film);
+      break;
   }
 
   static_assert(films::component_buffer_film::pixel_depth == 3,
@@ -125,6 +139,10 @@ void keyboard_cb(GLFWwindow *, int key, int, int action, int)
     case GLFW_KEY_2:
     case GLFW_KEY_KP_2:
       mode = render_mode::non_recursive;
+      break;
+    case GLFW_KEY_3:
+    case GLFW_KEY_KP_3:
+      mode = render_mode::global;
       break;
     default:
       break;
