@@ -11,6 +11,7 @@ SET( TEST_SOURCES
   ${CMAKE_CURRENT_LIST_DIR}/tests_lights_point_light.cpp
 
   ${CMAKE_CURRENT_LIST_DIR}/tests_math_coordinate_system.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/tests_math_monte_carlo_integrator.cpp
   ${CMAKE_CURRENT_LIST_DIR}/tests_math_point3d.cpp
   ${CMAKE_CURRENT_LIST_DIR}/tests_math_trigonometry.cpp
   ${CMAKE_CURRENT_LIST_DIR}/tests_math_utility.cpp
