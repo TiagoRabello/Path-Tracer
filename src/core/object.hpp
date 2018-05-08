@@ -6,6 +6,7 @@
 #include <math/ray3d.hpp>
 #include <shapes/intersection_info.hpp>
 #include <shapes/sphere.hpp>
+#include <shapes/quadrilateral.hpp>
 
 #include <boost/optional.hpp>
 
@@ -17,7 +18,7 @@ namespace core
 struct object
 {
   core::material material;
-  shapes::sphere shape;
+  shapes::quadrilateral shape;
 };
 
 inline bool operator==(object lhs, object rhs)

@@ -1,6 +1,8 @@
 SET( LIB_SOURCES
   ${LIB_SOURCES}
 
+  ${CMAKE_CURRENT_LIST_DIR}/brdfs/lambertian.hpp
+
   ${CMAKE_CURRENT_LIST_DIR}/cameras/pinhole_camera.cpp
   ${CMAKE_CURRENT_LIST_DIR}/cameras/pinhole_camera.hpp
 
@@ -31,8 +33,14 @@ SET( LIB_SOURCES
   ${CMAKE_CURRENT_LIST_DIR}/renderers/path_tracer.hpp
 
   ${CMAKE_CURRENT_LIST_DIR}/shapes/intersection_info.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/shapes/plane.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/shapes/plane.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/shapes/quadrilateral.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/shapes/quadrilateral.hpp
   ${CMAKE_CURRENT_LIST_DIR}/shapes/sphere.cpp
   ${CMAKE_CURRENT_LIST_DIR}/shapes/sphere.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/shapes/triangle.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/shapes/triangle.hpp
   PARENT_SCOPE
 )
 

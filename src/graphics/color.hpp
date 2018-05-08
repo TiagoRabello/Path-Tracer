@@ -54,7 +54,17 @@ inline color operator*(color lhs, color rhs)
 
 inline color operator/(color lhs, float rhs)
 {
-  return{ lhs.red / rhs, lhs.green / rhs, lhs.blue / rhs };
+	return{ lhs.red / rhs, lhs.green / rhs, lhs.blue / rhs };
+}
+
+inline color operator*(color lhs, float rhs)
+{
+	return{ lhs.red * rhs, lhs.green * rhs, lhs.blue * rhs };
+}
+
+inline color operator*(float lhs, color rhs)
+{
+	return rhs * lhs;
 }
 
 inline bool operator==(color lhs, color rhs)

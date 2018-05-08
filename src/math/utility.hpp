@@ -8,6 +8,7 @@
 #include "vector3d.hpp"
 
 #include <random>
+#include <utility>
 
 namespace math
 {
@@ -55,6 +56,17 @@ inline vector3d generate_unit_vector3d(RandEng&& gen, coordinate_system coord_sy
   return math::scaled(coord_system.v1, delta * math::cos(theta))
        + math::scaled(coord_system.v2, u)
        + math::scaled(coord_system.v3, delta * math::sin(theta));
+}
+
+template<typename RandEng>
+inline std::pair<float, float> uniform_sample_triangle(RandEng&& gen)
+{
+	std::uniform_real_distribution<float> dist;
+	const auto u1 = dist(gen);
+	const auto u2 = dist(gen);
+
+	const auto sqrtu1 = std::sqrt(u1);
+	return std::make_pair(1.0f - sqrtu1, u2 * sqrtu1);
 }
 
 }

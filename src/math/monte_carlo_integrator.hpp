@@ -12,13 +12,13 @@ struct monte_carlo_integrator
 
   void add_sample(T value, float prob)
   {
-    acc_value += value / prob;
+		acc_value += value / prob;
     n++;
   }
 
   T get_value() const
   {
-    return acc_value / float(n);
+		return acc_value / float(n);
   }
 };
 

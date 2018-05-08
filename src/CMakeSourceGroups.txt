@@ -1,3 +1,7 @@
+SOURCE_GROUP("Header Files\\brdfs" FILES
+  ${CMAKE_CURRENT_LIST_DIR}/brdfs/lambertian.hpp
+)
+
 SOURCE_GROUP("Header Files\\cameras" FILES
   ${CMAKE_CURRENT_LIST_DIR}/cameras/pinhole_camera.hpp
 )
@@ -43,11 +47,17 @@ SOURCE_GROUP("Header Files\\math" FILES
 
 SOURCE_GROUP("Header Files\\shapes" FILES
   ${CMAKE_CURRENT_LIST_DIR}/shapes/intersection_info.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/shapes/plane.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/shapes/quadrilateral.hpp
   ${CMAKE_CURRENT_LIST_DIR}/shapes/sphere.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/shapes/triangle.hpp
 )
 
 SOURCE_GROUP("Source Files\\shapes" FILES
+  ${CMAKE_CURRENT_LIST_DIR}/shapes/plane.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/shapes/quadrilateral.cpp
   ${CMAKE_CURRENT_LIST_DIR}/shapes/sphere.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/shapes/triangle.cpp
 )
 
 SOURCE_GROUP("Header Files\\renderers" FILES

@@ -58,14 +58,14 @@ boost::optional<shapes::intersection_info> closest_intersection(shapes::sphere s
   const auto dsq = orig_center_sqrd_dist - tPX * tPX;
   if (dsq > squared_radius) { return boost::none; }
 
-  float t;
+  auto t = tPX;
   if (tPX > 0.0f && origin_inside_sphere == false)
   {
-    t = tPX - std::sqrt(squared_radius - dsq);
+    t -= std::sqrt(squared_radius - dsq);
   }
   else
   {
-    t = tPX + std::sqrt(squared_radius - dsq);
+    t += std::sqrt(squared_radius - dsq);
   }
 
   shapes::intersection_info info;

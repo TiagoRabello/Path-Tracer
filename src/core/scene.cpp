@@ -24,7 +24,7 @@ bool intersects(const scene& scn, math::ray3d ray)
 boost::optional<core::intersection_info> closest_intersection(const scene& scn, math::ray3d ray)
 {
   core::intersection_info info;
-  float min_dist = std::numeric_limits<float>::infinity();
+  auto min_dist = std::numeric_limits<double>::infinity();
 
   for (auto &obj : scn.objects)
   {

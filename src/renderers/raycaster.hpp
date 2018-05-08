@@ -38,13 +38,12 @@ struct raycaster
       }
 
       // Avoid lighting from behind
-      auto cossine = math::dot(info.shape_info.normal, light_vector);
+      auto cossine = (float)math::dot(info.shape_info.normal, light_vector);
       if (cossine < 0.0f) { continue; }
 
       // Calculate light contribution
-      const auto diffuse  = core::diffuse_reflection(info.obj->material, ray.direction, light_vector, info.shape_info.normal);
-      const auto specular = core::specular_reflection(info.obj->material, ray.direction, light_vector, info.shape_info.normal);
-      color += light.color * (diffuse + specular);
+			const auto brdf = info.obj->material.brdf(ray.direction, light_vector);
+      color += light.color * brdf * cossine;
     }
 
     return color;

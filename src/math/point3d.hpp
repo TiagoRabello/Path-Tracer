@@ -9,9 +9,9 @@ namespace math
 
 struct point3d
 {
-  float x;
-  float y;
-  float z;
+  double x;
+  double y;
+  double z;
 };
 
 inline point3d operator-(point3d point)
@@ -29,7 +29,7 @@ inline bool operator!=(point3d lhs, point3d rhs)
   return !(lhs == rhs);
 }
 
-inline float squared_distance(point3d p1, point3d p2)
+inline double squared_distance(point3d p1, point3d p2)
 {
   auto x = p1.x - p2.x;
   auto y = p1.y - p2.y;
@@ -38,7 +38,7 @@ inline float squared_distance(point3d p1, point3d p2)
   return x * x + y * y + z * z;
 }
 
-inline float distance(point3d p1, point3d p2)
+inline double distance(point3d p1, point3d p2)
 {
   return std::sqrt(squared_distance(p1, p2));
 }

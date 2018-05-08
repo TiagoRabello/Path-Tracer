@@ -10,9 +10,9 @@ namespace math
 
 struct vector3d
 {
-  float x;
-  float y;
-  float z;
+  double x;
+  double y;
+  double z;
 
   vector3d& operator+=(vector3d other)
   {
@@ -58,22 +58,22 @@ inline vector3d cross(vector3d lhs, vector3d rhs)
            lhs.x * rhs.y - lhs.y * rhs.x };
 }
 
-inline float dot(vector3d lhs, vector3d rhs)
+inline double dot(vector3d lhs, vector3d rhs)
 {
   return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z;
 }
 
-inline float squared_length(vector3d vector)
+inline double squared_length(vector3d vector)
 {
   return dot(vector, vector);
 }
 
-inline float length(vector3d vector)
+inline double length(vector3d vector)
 {
   return std::sqrt(squared_length(vector));
 }
 
-inline vector3d scaled(vector3d vector, float factor)
+inline vector3d scaled(vector3d vector, double factor)
 {
   return { vector.x * factor, vector.y * factor, vector.z * factor };
 }
