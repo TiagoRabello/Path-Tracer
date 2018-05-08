@@ -1,5 +1,7 @@
 #include <core/physics.hpp>
 
+#include <cmath>
+
 #include "catch.hpp"
 
 SCENARIO("We can calculate the refracted vector", "[core][physics]")
@@ -32,7 +34,7 @@ SCENARIO("We can calculate the refracted vector", "[core][physics]")
         auto answer = core::refracted(incident, normal, n1, n2);
 
         auto sinT = n1 / n2 * incident.x;
-        auto cosT = std::signbit(incident.y) ? -sqrt(1.0f - sinT * sinT) : sqrt(1.0f - sinT * sinT);
+        auto cosT = std::signbit(incident.y) ? -std::sqrt(1.0f - sinT * sinT) : std::sqrt(1.0f - sinT * sinT);
         math::vector3d expected = { sinT, cosT };
         REQUIRE(answer == expected);
       }
