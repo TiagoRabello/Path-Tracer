@@ -6,6 +6,7 @@ SET( TEST_SOURCES
 
   ${CMAKE_CURRENT_LIST_DIR}/tests_core_intersection_info.cpp
   ${CMAKE_CURRENT_LIST_DIR}/tests_core_object.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/tests_core_physics.cpp
   ${CMAKE_CURRENT_LIST_DIR}/tests_core_scene.cpp
 
   ${CMAKE_CURRENT_LIST_DIR}/tests_lights_point_light.cpp

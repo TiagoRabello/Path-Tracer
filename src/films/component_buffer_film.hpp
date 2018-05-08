@@ -17,7 +17,7 @@ class component_buffer_film
 
 public:
 
-  static const int pixel_depth = 4;
+  static const int pixel_depth = 3;
 
   component_buffer_film(int width, int height)
   : width( width ), height( height ), buffer( width * height * pixel_depth )
@@ -37,7 +37,6 @@ public:
     buffer[pixel_start + 0] = color.red;
     buffer[pixel_start + 1] = color.green;
     buffer[pixel_start + 2] = color.blue;
-    buffer[pixel_start + 3] = color.alpha;
   }
 
   void resize(int new_width, int new_height)

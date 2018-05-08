@@ -26,7 +26,7 @@ public:
 
   graphics::color background_color;
 
-  void add(const object& obj) { objects.push_back(obj); }
+  void add(object obj) { objects.push_back(std::move(obj)); }
   void add(lights::point_light light) { lights.push_back(light); }
 
   const std::vector<lights::point_light>& get_lights() const { return lights; }

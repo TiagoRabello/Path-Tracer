@@ -9,6 +9,7 @@
 
 #include <boost/optional.hpp>
 
+#include <memory>
 #include <tuple>
 
 namespace core
@@ -16,17 +17,17 @@ namespace core
 
 struct object
 {
-  core::material material;
+  std::unique_ptr<core::material> material;
   shapes::sphere shape;
 };
 
-inline bool operator==(object lhs, object rhs)
+inline bool operator==(const object& lhs, const object& rhs)
 {
   return std::tie(lhs.material, lhs.shape)
     == std::tie(rhs.material, rhs.shape);
 }
 
-inline bool operator!=(object lhs, object rhs)
+inline bool operator!=(const object& lhs, const object& rhs)
 {
   return !(lhs == rhs);
 }

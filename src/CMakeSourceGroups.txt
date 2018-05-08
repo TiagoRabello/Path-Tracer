@@ -10,6 +10,7 @@ SOURCE_GROUP("Header Files\\core" FILES
   ${CMAKE_CURRENT_LIST_DIR}/core/intersection_info.hpp
   ${CMAKE_CURRENT_LIST_DIR}/core/material.hpp
   ${CMAKE_CURRENT_LIST_DIR}/core/object.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/core/physics.hpp
   ${CMAKE_CURRENT_LIST_DIR}/core/scene.hpp
 )
 
@@ -51,4 +52,5 @@ SOURCE_GROUP("Source Files\\shapes" FILES
 SOURCE_GROUP("Header Files\\renderers" FILES
   ${CMAKE_CURRENT_LIST_DIR}/renderers/normal_renderer.hpp
   ${CMAKE_CURRENT_LIST_DIR}/renderers/raycaster.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/renderers/raytracer.hpp
 )

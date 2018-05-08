@@ -7,15 +7,16 @@ SET( LIB_SOURCES
   ${CMAKE_CURRENT_LIST_DIR}/core/intersection_info.hpp
   ${CMAKE_CURRENT_LIST_DIR}/core/material.hpp
   ${CMAKE_CURRENT_LIST_DIR}/core/object.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/core/physics.hpp
   ${CMAKE_CURRENT_LIST_DIR}/core/scene.cpp
   ${CMAKE_CURRENT_LIST_DIR}/core/scene.hpp
 
   ${CMAKE_CURRENT_LIST_DIR}/films/component_buffer_film.hpp
-  
+
   ${CMAKE_CURRENT_LIST_DIR}/graphics/color.hpp
 
   ${CMAKE_CURRENT_LIST_DIR}/lights/point_light.hpp
-  
+
   ${CMAKE_CURRENT_LIST_DIR}/math/degrees.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/point3d.hpp
   ${CMAKE_CURRENT_LIST_DIR}/math/radians.hpp
@@ -26,6 +27,7 @@ SET( LIB_SOURCES
 
   ${CMAKE_CURRENT_LIST_DIR}/renderers/normal_renderer.hpp
   ${CMAKE_CURRENT_LIST_DIR}/renderers/raycaster.hpp
+  ${CMAKE_CURRENT_LIST_DIR}/renderers/raytracer.hpp
 
   ${CMAKE_CURRENT_LIST_DIR}/shapes/intersection_info.hpp
   ${CMAKE_CURRENT_LIST_DIR}/shapes/sphere.cpp

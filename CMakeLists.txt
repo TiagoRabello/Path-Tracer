@@ -20,6 +20,7 @@ PROJECT( "path_tracer" CXX C )
 IF( WIN32 )
 
   SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX /W4" )
+  SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4702" ) # Necessary for catch to compile cleanly
 
 ELSE( WIN32 )
 
