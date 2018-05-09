@@ -21,14 +21,14 @@ bool intersects(const scene& scn, math::ray3d ray)
   });
 }
 
-boost::optional<core::intersection_info> closest_intersection(const scene& scn, math::ray3d ray)
+boost::optional<core::intersection_info> closest_intersection(const scene& scn, math::ray3d ray, bool backface)
 {
   core::intersection_info info;
   auto min_dist = std::numeric_limits<double>::infinity();
 
   for (auto &obj : scn.objects)
   {
-    auto possible_inter = closest_intersection(obj, ray);
+    auto possible_inter = closest_intersection(obj, ray, backface);
 
     if (possible_inter.is_initialized() == false) { continue; }
 

@@ -33,6 +33,10 @@ public:
     assert(x < width);
     assert(y < height);
 
+		color.red = std::max(0.0f, std::min(color.red, 1.0f));
+		color.green = std::max(0.0f, std::min(color.green, 1.0f));
+		color.blue = std::max(0.0f, std::min(color.blue, 1.0f));
+
     const auto pixel_start = (x + y * width) * pixel_depth;
     buffer[pixel_start + 0] = color.red;
     buffer[pixel_start + 1] = color.green;

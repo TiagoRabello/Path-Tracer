@@ -16,9 +16,9 @@ struct normal_renderer
     graphics::color color;
     auto normal = info.shape_info.normal;
 
-    color.red = (normal.x + 1.0f) / 2.0f;
-    color.green = (normal.y + 1.0f) / 2.0f;
-    color.blue = (normal.z + 1.0f) / 2.0f;
+    color.red = float(normal.x + 1.0f) / 2.0f;
+    color.green = float(normal.y + 1.0f) / 2.0f;
+    color.blue = float(normal.z + 1.0f) / 2.0f;
 
     return color;
   }

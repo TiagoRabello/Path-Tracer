@@ -56,8 +56,13 @@ cameras::pinhole_camera camera{ eye, at, up, fovy, nearp, farp, film_width, film
 
 cameras::pinhole_camera create_cornell_box_camera(int width, int height)
 {
+#if 1
 	const auto eye1 = math::point3d{ 278.0f, 273.0f, -800.0f };
 	const auto at1 = math::point3d{ 278.0f, 273.0f, -799.0f };
+#else
+	const auto eye1 = math::point3d{ 278.0f, 500.0f, 3.0f };
+	const auto at1 = math::point3d{ 400.0f, 0.0f, 550.0f };
+#endif
 	const auto up1 = math::vector3d{ 0.0f, 1.0f, 0.0f };
 	const auto fovy1 = math::degrees{ 45.0f };
 	const auto nearp1 = 0.035f;
@@ -82,12 +87,12 @@ core::scene create_cornell_box_scene()
 
 	core::object light;
 	const auto light_albedo = graphics::color{ 0.78f, 0.78f, 0.78f };
-	const auto light_intensity = graphics::color{ 16.86f, 10.76f, 3.7f };
+	const auto light_intensity = graphics::color{ 4.0f * 12.0f,4.0f * 12.0f,4.0f * 12.0f };//16.86f * 4.0f, 10.76f * 4.0f, 3.7f * 4.0f * 2.0f };
 	light.material = { brdfs::lambertian{ light_albedo }, light_intensity };
-	light.shape = { math::point3d{ 343.0f, 548.8f, 227.0f }
-	              , math::point3d{ 343.0f, 548.8f, 332.0f }
-	              , math::point3d{ 213.0f, 548.8f, 332.0f }
-	              , math::point3d{ 213.0f, 548.8f, 227.0f } };
+	light.shape = { math::point3d{ 343.0f, 546.8f, 227.0f }
+	              , math::point3d{ 343.0f, 546.8f, 332.0f }
+	              , math::point3d{ 213.0f, 546.8f, 332.0f }
+	              , math::point3d{ 213.0f, 546.8f, 227.0f } };
 	local_scene.add(light);
 
 	core::object floor;
@@ -130,7 +135,15 @@ core::scene create_cornell_box_scene()
 	                  , math::point3d{ 556.0f, 548.9f, 0.0f } };
 	local_scene.add(left_wall);
 
-	// Short Block
+	core::object a_wall;
+	a_wall.material = { brdfs::lambertian{ white }, black };
+	a_wall.shape = { math::point3d{ 556.0f, 548.9f, 0.0f } 
+										, math::point3d{ 0.0f, 548.9f, 0.0f }
+	                  , math::point3d{ 0.0f, 0.0f, 0.0f }
+	                  , math::point3d{ 552.8f, 0.0f, 0.0f } };
+	local_scene.add(a_wall);
+
+	 // Short Block
 	{
 		core::object short_block_side1;
 		short_block_side1.material = { brdfs::lambertian{ white }, black };
@@ -142,34 +155,34 @@ core::scene create_cornell_box_scene()
 		
 		core::object short_block_side2;
 		short_block_side2.material = { brdfs::lambertian{ white }, black };
-		short_block_side2.shape = { math::point3d{ 290.0f, 0.0f, 114.0f }
+		short_block_side2.shape = { math::point3d{ 290.0f, -5.0f, 114.0f }
 		                          , math::point3d{ 290.0f, 165.0f, 114.0f }
 		                          , math::point3d{ 240.0f, 165.0f, 272.0f }
-		                          , math::point3d{ 240.0f, 0.0f, 272.0f } };
+		                          , math::point3d{ 240.0f, -5.0f, 272.0f } };
 		local_scene.add(short_block_side2);
 		
 		core::object short_block_side3;
 		short_block_side3.material = { brdfs::lambertian{ white }, black };
-		short_block_side3.shape = { math::point3d{ 130.0f, 0.0f, 65.0f }
+		short_block_side3.shape = { math::point3d{ 130.0f, -5.0f, 65.0f }
 		                          , math::point3d{ 130.0f, 165.0f, 65.0f }
 		                          , math::point3d{ 290.0f, 165.0f, 114.0f }
-		                          , math::point3d{ 290.0f, 0.0f, 114.0f } };
+		                          , math::point3d{ 290.0f, -5.0f, 114.0f } };
 		local_scene.add(short_block_side3);
 		
 		core::object short_block_side4;
 		short_block_side4.material = { brdfs::lambertian{ white }, black };
-		short_block_side4.shape = { math::point3d{ 82.0f, 0.0f, 225.0f }
+		short_block_side4.shape = { math::point3d{ 82.0f, -5.0f, 225.0f }
 		                          , math::point3d{ 82.0f, 165.0f, 225.0f }
 		                          , math::point3d{ 130.0f, 165.0f, 65.0f }
-		                          , math::point3d{ 130.0f, 0.0f, 65.0f } };
+		                          , math::point3d{ 130.0f, -5.0f, 65.0f } };
 		local_scene.add(short_block_side4);
 		
 		core::object short_block_side5;
 		short_block_side5.material = { brdfs::lambertian{ white }, black };
-		short_block_side5.shape = { math::point3d{ 240.0f, 0.0f, 272.0f }
+		short_block_side5.shape = { math::point3d{ 240.0f, -5.0f, 272.0f }
 		                          , math::point3d{ 240.0f, 165.0f, 272.0f }
 		                          , math::point3d{ 82.0f, 165.0f, 225.0f }
-		                          , math::point3d{ 82.0f, 0.0f, 225.0f } };
+		                          , math::point3d{ 82.0f, -5.0f, 225.0f } };
 		local_scene.add(short_block_side5);
 	}
 
@@ -185,34 +198,34 @@ core::scene create_cornell_box_scene()
 		
 		core::object tall_block_side2;
 		tall_block_side2.material = { brdfs::lambertian{ white }, black };
-		tall_block_side2.shape = { math::point3d{ 423.0f, 0.0f, 247.0f }
+		tall_block_side2.shape = { math::point3d{ 423.0f, -50.0f, 247.0f }
 		                         , math::point3d{ 423.0f, 330.0f, 247.0f }
 		                         , math::point3d{ 472.0f, 330.0f, 406.0f }
-		                         , math::point3d{ 472.0f, 0.0f, 406.0f } };
+		                         , math::point3d{ 472.0f, -50.0f, 406.0f } };
 		local_scene.add(tall_block_side2);
 		
 		core::object tall_block_side3;
 		tall_block_side3.material = { brdfs::lambertian{ white }, black };
-		tall_block_side3.shape = { math::point3d{ 472.0f, 0.0f, 406.0f }
+		tall_block_side3.shape = { math::point3d{ 472.0f, -50.0f, 406.0f }
 		                         , math::point3d{ 472.0f, 330.0f, 406.0f }
 		                         , math::point3d{ 314.0f, 330.0f, 456.0f }
-		                         , math::point3d{ 314.0f, 0.0f, 456.0f } };
+		                         , math::point3d{ 314.0f, -50.0f, 456.0f } };
 		local_scene.add(tall_block_side3);
 		
 		core::object tall_block_side4;
 		tall_block_side4.material = { brdfs::lambertian{ white }, black };
-		tall_block_side4.shape = { math::point3d{ 314.0f, 0.0f, 456.0f }
+		tall_block_side4.shape = { math::point3d{ 314.0f, -50.0f, 456.0f }
 		                         , math::point3d{ 314.0f, 330.0f, 456.0f }
 		                         , math::point3d{ 265.0f, 330.0f, 296.0f }
-		                         , math::point3d{ 265.0f, 0.0f, 296.0f } };
+		                         , math::point3d{ 265.0f, -50.0f, 296.0f } };
 		local_scene.add(tall_block_side4);
 		
 		core::object tall_block_side5;
 		tall_block_side5.material = { brdfs::lambertian{ white }, black };
-		tall_block_side5.shape = { math::point3d{ 265.0f, 0.0f, 296.0f }
+		tall_block_side5.shape = { math::point3d{ 265.0f, -50.0f, 296.0f }
 		                         , math::point3d{ 265.0f, 330.0f, 296.0f }
 		                         , math::point3d{ 423.0f, 330.0f, 247.0f }
-		                         , math::point3d{ 423.0f, 0.0f, 247.0f } };
+		                         , math::point3d{ 423.0f, -50.0f, 247.0f } };
 		local_scene.add(tall_block_side5);
 	}
 

@@ -46,7 +46,7 @@ bool intersects(shapes::triangle shape, math::ray3d ray)
 //
 // Note:
 //  If ray origin is on the plane, no intersection is found.
-boost::optional<shapes::intersection_info> closest_intersection(shapes::triangle shape, math::ray3d ray)
+boost::optional<shapes::intersection_info> closest_intersection(shapes::triangle shape, math::ray3d ray, bool backface)
 {
 	const auto e1 = math::make_vector3d(shape.p1, shape.p2);
 	const auto e2 = math::make_vector3d(shape.p1, shape.p3);
@@ -70,6 +70,8 @@ boost::optional<shapes::intersection_info> closest_intersection(shapes::triangle
 
 	const auto normal = math::normalized(math::cross(e2, e1));
 	const auto dir_norm_dot = math::dot(ray.direction, normal);
+
+	if (!backface && std::signbit(dir_norm_dot)) { return boost::none; }
 
   shapes::intersection_info info;
   info.point = math::translated(ray.origin, math::scaled(ray.direction, d));

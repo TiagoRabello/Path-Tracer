@@ -33,11 +33,11 @@ public:
 	const std::vector<object>& get_objects() const { return objects; }
 
   friend bool intersects(const scene& scene, math::ray3d ray);
-  friend boost::optional<core::intersection_info> closest_intersection(const scene& scene, math::ray3d ray);
+  friend boost::optional<core::intersection_info> closest_intersection(const scene& scene, math::ray3d ray, bool backface);
 };
 
 bool intersects(const scene& scn, math::ray3d ray);
-boost::optional<core::intersection_info> closest_intersection(const scene& scn, math::ray3d ray);
+boost::optional<core::intersection_info> closest_intersection(const scene& scn, math::ray3d ray, bool backface = true);
 
 }
 

@@ -42,7 +42,7 @@ bool intersects(shapes::quadrilateral shape, math::ray3d ray);
 //
 // Note:
 //  If ray origin is on the plane, no intersection is found.
-boost::optional<shapes::intersection_info> closest_intersection(shapes::quadrilateral shape, math::ray3d ray);
+boost::optional<shapes::intersection_info> closest_intersection(shapes::quadrilateral shape, math::ray3d ray, bool backface);
 
 inline double area(shapes::quadrilateral shape)
 {

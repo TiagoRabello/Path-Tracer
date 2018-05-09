@@ -24,12 +24,12 @@ std::ranlux24_base & get_default_random_engine()
 	return gen;
 }
 
-bool is_valid_color(graphics::color color)
+bool is_valid_color(graphics::color /*color*/)
 {
-	return !std::isnan(color.red) && !std::isnan(color.green) && !std::isnan(color.blue)
+	return true;/*!std::isnan(color.red) && !std::isnan(color.green) && !std::isnan(color.blue)
 	    && 0.0f <= color.red && color.red <= 1.0f
 	    && 0.0f <= color.green && color.green <= 1.0f
-	    && 0.0f <= color.blue && color.blue <= 1.0f;
+	    && 0.0f <= color.blue && color.blue <= 1.0f;*/
 }
 
 namespace renderers
@@ -46,9 +46,10 @@ namespace renderers
 			for (auto& object : scene.get_objects())
 			{
 				if (object.material.emissive_color == graphics::color{ 0.0f, 0.0f, 0.0f }) { continue; }
+				if (&object == info.obj) { continue; }
 
 				math::monte_carlo_integrator<graphics::color> integrator;
-				for (int i = 0; i < 10; i++)
+				for (int i = 0; i < 100; i++)
 				{
 					auto light_sample = sample_surface(get_default_random_engine(), object.shape);
 
@@ -57,6 +58,16 @@ namespace renderers
 					auto light_distance = math::length(light_vector);
 					light_vector = math::scaled(light_vector, 1 / light_distance);
 
+					// Change surface pdf to solid angle pdf
+					auto light_cossine = math::dot(light_sample.normal, -light_vector);
+					if (light_cossine < 0.0f)
+					{
+						integrator.add_sample(graphics::color{ 0.0f, 0.0f, 0.0f }, 1.0f);
+						continue;
+					}
+					light_sample.pdf = float(light_distance * light_distance)
+					                 / float(light_cossine * area(object.shape));
+
 					// Avoid lighting from behind
 					auto cossine = math::dot(info.shape_info.normal, light_vector);
 					if (cossine < 0.0f)
@@ -64,11 +75,6 @@ namespace renderers
 						integrator.add_sample(graphics::color{ 0.0f, 0.0f, 0.0f }, 1.0f);
 						continue;
 					}
-
-					// Change surface pdf to solid angle pdf
-					auto light_cossine = std::abs(math::dot(light_sample.normal, -light_vector));
-					light_sample.pdf = float(light_distance * light_distance)
-					                 / float(light_cossine * area(object.shape));
 
 					// Move intersection point forward a little bit to avoid self-intersections.
 					auto point = math::translated(info.shape_info.point, math::scaled(light_vector, 5.0f));
@@ -82,7 +88,7 @@ namespace renderers
 						const core::intersection_info& info2 = possible_inter.get();
 						if (info2.obj == info.obj)
 						{
-							printf("Debug failed!");
+							printf("Self failed!");
 						}
 
 						integrator.add_sample(graphics::color{ 0.0f, 0.0f, 0.0f }, 1.0f);
@@ -111,7 +117,7 @@ namespace renderers
 		template<typename SceneType>
 		graphics::color shade_global(SceneType&& scene, math::ray3d ray, int num_samples, int curr_depth) const
 		{
-			const auto closest_inter = closest_intersection(scene, ray);
+			const auto closest_inter = closest_intersection(scene, ray, curr_depth != 0);
 			if (closest_inter.is_initialized() == false) { return{}; }
 
 			const auto &info = *closest_inter;
@@ -181,7 +187,7 @@ namespace renderers
 					pixels.push_back(std::async(std::launch::async, [this, x, y, &camera, &scene, &film]()
 					{
 						const auto ray = camera.generate_ray(float(x), float(y));
-						const auto color = shade_global(scene, ray, 10, 0);
+						const auto color = shade_global(scene, ray, 500, 0);
 						film.add_sample(x, y, color);
 					}));
 				}

@@ -32,18 +32,18 @@ bool intersects(shapes::quadrilateral shape, math::ray3d ray)
 //
 // Note:
 //  If ray origin is on the plane, no intersection is found.
-boost::optional<shapes::intersection_info> closest_intersection(shapes::quadrilateral shape, math::ray3d ray)
+boost::optional<shapes::intersection_info> closest_intersection(shapes::quadrilateral shape, math::ray3d ray, bool backface = true)
 {
 	shapes::triangle t1{ shape.p1, shape.p2, shape.p3 };
 
-	const auto inter = closest_intersection(t1, ray);
+	const auto inter = closest_intersection(t1, ray, backface);
 	if (inter.is_initialized())
 	{
 		return inter;
 	}
 
 	shapes::triangle t2{ shape.p3, shape.p4, shape.p1 };
-	return closest_intersection(t2, ray);
+	return closest_intersection(t2, ray, backface);
 }
 
 }

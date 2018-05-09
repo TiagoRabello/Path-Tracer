@@ -37,9 +37,9 @@ inline bool intersects(const object& obj, math::ray3d ray)
   return shapes::intersects(obj.shape, ray);
 }
 
-inline boost::optional<shapes::intersection_info> closest_intersection(const object& obj, math::ray3d ray)
+inline boost::optional<shapes::intersection_info> closest_intersection(const object& obj, math::ray3d ray, bool backface = true)
 {
-  return shapes::closest_intersection(obj.shape, ray);
+  return shapes::closest_intersection(obj.shape, ray, backface);
 }
 
 }

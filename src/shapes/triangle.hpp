@@ -41,7 +41,7 @@ bool intersects(shapes::triangle shape, math::ray3d ray);
 //
 // Note:
 //  If ray origin is on the plane, no intersection is found.
-boost::optional<shapes::intersection_info> closest_intersection(shapes::triangle shape, math::ray3d ray);
+boost::optional<shapes::intersection_info> closest_intersection(shapes::triangle shape, math::ray3d ray, bool backface = true);
 
 struct surface_sample
 {
